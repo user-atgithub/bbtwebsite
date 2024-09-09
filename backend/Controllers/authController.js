@@ -20,7 +20,7 @@ export const register = async (req, res) => {
       user = await Technician.findOne({ email });
     }
 
-    // Check if user exists
+    // Check if user exists than
     if (user) {
       return res.status(400).json({ message: 'User already exists' });
     }

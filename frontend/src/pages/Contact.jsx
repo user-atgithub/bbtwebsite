@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import emailjs from 'emailjs-com';
+import { contactQuestions } from '../Assets/data/contactQuestions.js'; // Import the questions
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -20,15 +21,6 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Prepare the data to be sent to EmailJS
-        const emailParams = {
-            name: formData.name,       // Sender's name
-            message: formData.message,  // Message body
-            email: formData.email,   // 
-            subject: formData.subject   // Optional: if you want to include the subject
-        };
-
-        // Send email using EmailJS
         emailjs.send('service_ofq7keb', 'template_kplgzjk', formData, '-DOGhLMLwNhbIz-Ca')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
@@ -47,62 +39,22 @@ const Contact = () => {
                     Got a technical issue? Want to send feedback about a beta feature? Let us know.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-8">
-                    <div>
-                        <label htmlFor="name" className="form__label">
-                            Your Name
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="John Doe"
-                            className="form__input mt-1"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="form__label">
-                            Your Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="example@gmail.com"
-                            className="form__input mt-1"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="subject" className="form__label">
-                            Subject
-                        </label>
-                        <input
-                            type="text"
-                            id="subject"
-                            placeholder="Let us know how we can help you"
-                            className="form__input mt-1"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="sm:col-span-2">
-                        <label htmlFor="message" className="form__label">
-                            Your Message
-                        </label>
-                        <textarea
-                            rows="6"
-                            id="message"
-                            placeholder="Leave a comment...."
-                            className="form__input mt-1"
-                            value={formData.message}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+                    {contactQuestions.map((q, index) => (
+                        <div key={index}>
+                            <label htmlFor={q.key} className="form__label">
+                                {q.question}
+                            </label>
+                            <input
+                                type="text"
+                                id={q.key}
+                                placeholder={q.placeholder} // Use placeholder from contactQuestions
+                                className="form__input mt-1"
+                                value={formData[q.key]}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    ))}
                     <button
                         type="submit"
                         className="btn rounded sm:w-fit"

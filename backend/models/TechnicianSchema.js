@@ -23,7 +23,15 @@ const TechnicianSchema = new mongoose.Schema({
 
   bio: { type: String, maxLength: 50 },
   about: { type: String },
-  timeSlots: { type: Array },
+  timeSlots: {
+    type: Array,
+    validate: {
+      validator: function(v) {
+        return v.length <= 7; // Limit to 7 time slots
+      },
+      message: props => `You can only have up to 7 time slots.`
+    }
+  },
   reviews: [{ type: mongoose.Types.ObjectId, ref: "Review" }],
   averageRating: {
     type: Number,

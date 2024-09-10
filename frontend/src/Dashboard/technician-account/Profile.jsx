@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineClose } from "react-icons/ai";
 import uploadImageToCloudinary from "../../utils/uploadCloudinary.js";
 import { BASE_URL, token } from "../../config.js";
 import { toast } from "react-toastify";
@@ -19,24 +19,23 @@ const Profile = ({ technicianData }) => {
         about: "",
         photo: null,
     });
-useEffect(() => {
-    console.log('Technician Data:', technicianData); // Debugging line
-    setFormData({
-        name: technicianData?.name || '',
-        email: technicianData?.email || '',
-        phone: technicianData?.phone || '',
-        bio: technicianData?.bio || '',
-        gender: technicianData?.gender || '',
-        specialization: technicianData?.specialization || '',
-        ticketPrice: technicianData?.ticketPrice || 0,
-        qualifications: technicianData?.qualifications || [],
-        experiences: technicianData?.experiences || [],
-        timeSlots: technicianData?.timeSlots || [],
-        about: technicianData?.about || '',
-        photo: technicianData?.photo || null,
-    });
-}, [technicianData]);
 
+    useEffect(() => {
+        setFormData({
+            name: technicianData?.name || '',
+            email: technicianData?.email || '',
+            phone: technicianData?.phone || '',
+            bio: technicianData?.bio || '',
+            gender: technicianData?.gender || '',
+            specialization: technicianData?.specialization || '',
+            ticketPrice: technicianData?.ticketPrice || 0,
+            qualifications: technicianData?.qualifications || [],
+            experiences: technicianData?.experiences || [],
+            timeSlots: technicianData?.timeSlots || [],
+            about: technicianData?.about || '',
+            photo: technicianData?.photo || null,
+        });
+    }, [technicianData]);
 
     const handleFileInputChange = async (event) => {
         const file = event.target.files[0];
@@ -44,6 +43,13 @@ useEffect(() => {
         setFormData((prevFormData) => ({
             ...prevFormData,
             photo: data?.url
+        }));
+    };
+
+    const removePhoto = () => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            photo: null
         }));
     };
 
@@ -123,6 +129,10 @@ useEffect(() => {
 
     const addTimeSlot = (e) => {
         e.preventDefault();
+        if (formData.timeSlots.length >= 7) {
+            toast.error("You cannot add more than 7 time slots.");
+            return;
+        }
         setFormData((prevFormData) => ({
             ...prevFormData,
             timeSlots: [
@@ -268,150 +278,171 @@ useEffect(() => {
                     </div>
                 </div>
                 <div className="mb-5">
-                    <p className="form_label">Qualifications*</p>
-                    {formData.qualifications?.map((item, index) => (
-                        <div key={index}>
-                            <div>
-                                <div className="grid grid-cols-2 gap-5 mt-5">
-                                    <div>
-                                        <p className="form_label">Starting Date*</p>
-                                        <input
-                                            type="date"
-                                            name="startingDate"
-                                            value={item.startingDate}
-                                            className="box_style"
-                                            onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
-                                            autoComplete="startingDate"
-                                        />
-                                    </div>
-                                    <div>
-                                        <p className="form_label">Ending Date*</p>
-                                        <input
-                                            type="date"
-                                            name="endingDate"
-                                            value={item.endingDate}
-                                            className="box_style"
-                                            onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
-                                            autoComplete="endingDate"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-5 mt-5">
-                                <div>
-                                    <p className="form_label">Degree*</p>
-                                    <input
-                                        type="text"
-                                        name="degree"
-                                        value={item.degree}
-                                        placeholder="Degree"
-                                        className="box_style"
-                                        onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
-                                        autoComplete="degree"
-                                    />
-                                </div>
-                                <div>
-                                    <p className="form_label">University*</p>
-                                    <input
-                                        type="text"
-                                        name="university"
-                                        value={item.university}
-                                        placeholder="University"
-                                        className="box_style"
-                                        onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
-                                        autoComplete="university"
-                                    />
-                                </div>
-                            </div>
-                            <div className="flex justify-end items-center mt-4">
-                                <button
-                                    className="py-2 px-4 text-white bg-red-600 rounded-md"
-                                    onClick={e => deleteQualification(e, index)}
-                                >
-                                    <AiOutlineDelete className="text-xl" />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                    <div className="mt-5">
-                        <button onClick={addQualification} className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
-                            Add Qualification
-                        </button>
+    <p className="form_label">Qualifications*</p>
+    {formData.qualifications?.map((item, index) => (
+        <div key={index}>
+            <div>
+                <div className="grid grid-cols-2 gap-5 mt-5">
+                    <div>
+                        <p className="form_label">Starting Date*</p>
+                        <input
+                            type="date"
+                            name="startingDate"
+                            value={item.startingDate}
+                            className="box_style"
+                            onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
+                            autoComplete="startingDate"
+                        />
+                    </div>
+                    <div>
+                        <p className="form_label">Ending Date*</p>
+                        {index === 0 ? (
+                            <input
+                                type="text"
+                                value="Present"
+                                className="box_style bg-gray-200 text-gray-500"
+                                readOnly
+                            />
+                        ) : (
+                            <input
+                                type="date"
+                                name="endingDate"
+                                value={item.endingDate}
+                                className="box_style"
+                                onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
+                                autoComplete="endingDate"
+                            />
+                        )}
                     </div>
                 </div>
+            </div>
+            <div className="grid grid-cols-2 gap-5 mt-5">
+                <div>
+                    <p className="form_label">Degree*</p>
+                    <input
+                        type="text"
+                        name="degree"
+                        value={item.degree}
+                        placeholder="Degree"
+                        className="box_style"
+                        onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
+                        autoComplete="degree"
+                    />
+                </div>
+                <div>
+                    <p className="form_label">University*</p>
+                    <input
+                        type="text"
+                        name="university"
+                        value={item.university}
+                        placeholder="University"
+                        className="box_style"
+                        onChange={e => handleReusableInputChangeFunc('qualifications', index, e)}
+                        autoComplete="university"
+                    />
+                </div>
+            </div>
+            <div className="flex justify-end items-center mt-4">
+                <button
+                    className="py-2 px-4 text-white bg-red-600 rounded-md"
+                    onClick={e => deleteQualification(e, index)}
+                >
+                    <AiOutlineDelete className="text-xl" />
+                </button>
+            </div>
+        </div>
+    ))}
+    <div className="mt-5">
+        <button onClick={addQualification} className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+            Add Qualification
+        </button>
+    </div>
+</div>
 
-                <div className="mb-5">
-                    <p className="form_label">Experiences*</p>
-                    {formData.experiences?.map((item, index) => (
-                        <div key={index}>
-                            <div>
-                                <div className="grid grid-cols-2 gap-5 mt-5">
-                                    <div>
-                                        <p className="form_label">Starting Date*</p>
-                                        <input
-                                            type="date"
-                                            name="startingDate"
-                                            value={item.startingDate}
-                                            className="box_style"
-                                            onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
-                                            autoComplete="startingDate"
-                                        />
-                                    </div>
-                                    <div>
-                                        <p className="form_label">Ending Date*</p>
-                                        <input
-                                            type="date"
-                                            name="endingDate"
-                                            value={item.endingDate}
-                                            className="box_style"
-                                            onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
-                                            autoComplete="endingDate"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-5 mt-5">
-                                <div>
-                                    <p className="form_label">Position*</p>
-                                    <input
-                                        type="text"
-                                        name="position"
-                                        value={item.position}
-                                        placeholder="Position"
-                                        className="box_style"
-                                        onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
-                                        autoComplete="position"
-                                    />
-                                </div>
-                                <div>
-                                    <p className="form_label">Garage*</p>
-                                    <input
-                                        type="text"
-                                        name="garage"
-                                        value={item.garage}
-                                        placeholder="Garage"
-                                        className="box_style"
-                                        onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
-                                        autoComplete="garage"
-                                    />
-                                </div>
-                            </div>
-                            <div className="flex justify-end items-center mt-4">
-                                <button
-                                    className="py-2 px-4 text-white bg-red-600 rounded-md"
-                                    onClick={e => deleteExperience(e, index)}
-                                >
-                                    <AiOutlineDelete className="text-xl" />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                    <div className="mt-5">
-                        <button onClick={addExperience} className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
-                            Add Experience
-                        </button>
+
+<div className="mb-5">
+    <p className="form_label">Experiences*</p>
+    {formData.experiences?.map((item, index) => (
+        <div key={index}>
+            <div>
+                <div className="grid grid-cols-2 gap-5 mt-5">
+                    <div>
+                        <p className="form_label">Starting Date*</p>
+                        <input
+                            type="date"
+                            name="startingDate"
+                            value={item.startingDate}
+                            className="box_style"
+                            onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
+                            autoComplete="startingDate"
+                        />
+                    </div>
+                    <div>
+                        <p className="form_label">Ending Date*</p>
+                        {index === 0 ? (
+                            <input
+                                type="text"
+                                value="Present"
+                                className="box_style bg-gray-200 text-gray-500"
+                                readOnly
+                            />
+                        ) : (
+                            <input
+                                type="date"
+                                name="endingDate"
+                                value={item.endingDate}
+                                className="box_style"
+                                onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
+                                autoComplete="endingDate"
+                            />
+                        )}
                     </div>
                 </div>
+            </div>
+            <div className="grid grid-cols-2 gap-5 mt-5">
+                <div>
+                    <p className="form_label">Position*</p>
+                    <input
+                        type="text"
+                        name="position"
+                        value={item.position}
+                        placeholder="Position"
+                        className="box_style"
+                        onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
+                        autoComplete="position"
+                    />
+                </div>
+                <div>
+                    <p className="form_label">Garage*</p>
+                    <input
+                        type="text"
+                        name="garage"
+                        value={item.garage}
+                        placeholder="Garage"
+                        className="box_style"
+                        onChange={e => handleReusableInputChangeFunc('experiences', index, e)}
+                        autoComplete="garage"
+                    />
+                </div>
+            </div>
+            <div className="flex justify-end items-center mt-4">
+                <button
+                    className="py-2 px-4 text-white bg-red-600 rounded-md"
+                    onClick={e => deleteExperience(e, index)}
+                >
+                    <AiOutlineDelete className="text-xl" />
+                </button>
+            </div>
+        </div>
+    ))}
+    <div className="mt-5">
+        <button onClick={addExperience} className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+            Add Experience
+        </button>
+    </div>
+</div>
+
+
 
                 <div className="mb-5">
                     <p className="form_label">Time Slots*</p>
@@ -489,24 +520,43 @@ useEffect(() => {
                         autoComplete="about"
                     />
                 </div>
-                <div className="relative w-[130px] h-[50px]">
-                    <input
-                        type="file"
-                        name="photo"
-                        id="customFile"
-                        onChange={handleFileInputChange}
-                        accept=".jpg, .png"
-                        className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-                    />
-                    <label
-                        htmlFor="customFile"
-                        className="absolute top-0 left-0 w-full h-full flex items-center px-[0.75rem] py-[0.375rem] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer"
-                    >
-                        Upload Photo
-                    </label>
+                <div className="mb-5">
+                    <div className="relative w-[130px] h-[130px] rounded-full overflow-hidden">
+                        {formData.photo ? (
+                            <>
+                                <img
+                                    src={formData.photo}
+                                    alt="Profile"
+                                    className="object-cover w-full h-full"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={removePhoto}
+                                    className="absolute top-0 right-0 p-2 bg-white rounded-fullabsolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white bg-opacity-70 rounded-full border border-gray-300 z-10"
+                                >
+                                    <AiOutlineClose className="text-red-500" />
+                                </button>
+                            </>
+                        ) : (
+                            <label
+                                htmlFor="customFile"
+                                className="flex items-center justify-center w-full h-full bg-gray-200 text-gray-600 rounded-full cursor-pointer"
+                            >
+                                <span>Upload Photo</span>
+                            </label>
+                        )}
+                        <input
+                            type="file"
+                            name="photo"
+                            id="customFile"
+                            onChange={handleFileInputChange}
+                            accept=".jpg, .png"
+                            className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                        />
+                    </div>
                 </div>
 
-                <div className="mt-5">
+                <div className="mb-5">
                     <button
                         type="submit"
                         className="w-full py-4 text-white bg-primaryColor rounded-[8px]"

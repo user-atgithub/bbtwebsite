@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../Assets/images/logo.png';  // Keep the logo import
 import { RiLinkedinFill } from 'react-icons/ri';
 import { AiFillYoutube, AiFillFacebook, AiOutlineInstagram } from 'react-icons/ai';
 
@@ -91,7 +92,15 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="flex flex-col items-center">
+
+        {/* Center-aligned Logo, Social Media Links, and Copyright */}
+        <div className="flex flex-col items-center justify-center text-center">
+          {/* Logo centered and resized to 1/2 of its original size */}
+          <div className="mb-4">
+            <img src={logo} alt="Logo" className="w-1/2 mx-auto" />
+          </div>
+
+          {/* Social Media Icons */}
           <div className="flex gap-4 mb-4">
             {socialLinks.map((link, index) => (
               <a 
@@ -105,6 +114,8 @@ const Footer = () => {
               </a>
             ))}
           </div>
+
+          {/* Copyright Text */}
           <p className="text-center text-[16px] leading-7 font-[400] text-textColor">
             Copyright © {year} developed by Bhuvnesh Magon. All rights reserved.
           </p>

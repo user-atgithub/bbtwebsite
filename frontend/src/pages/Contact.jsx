@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import emailjs from 'emailjs-com';
-import { contactQuestions } from '../Assets/data/contactQuestions.js'; // Import the questions
+import { contactQuestions } from '../Assets/data/contactQuestions.js';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        contactNumber: '',
         subject: '',
-        message: ''
+        message: '',
+
     });
     const [messageStatus, setMessageStatus] = useState('');
 
@@ -47,7 +49,7 @@ const Contact = () => {
                             <input
                                 type="text"
                                 id={q.key}
-                                placeholder={q.placeholder} // Use placeholder from contactQuestions
+                                placeholder={q.placeholder}
                                 className="form__input mt-1"
                                 value={formData[q.key]}
                                 onChange={handleChange}

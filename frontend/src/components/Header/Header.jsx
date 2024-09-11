@@ -3,6 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 import { BiMenu } from "react-icons/bi";
 import { authContext } from '../../Assets/context/authContext';
 import logo from '../../Assets/images/logo.png';
+import defaultCustomer from '../../Assets/images/defaultCustomer.png';
+import defaultTechnician from '../../Assets/images/defaultTechnician.png';
 
 const navLinks = [
   { path: '/home', display: 'Home' },
@@ -71,32 +73,46 @@ const Header = () => {
             </ul>
           </div>
 
-          {/* Nav Right */}
-          <div className="flex items-center gap-4">
-            {token && user ? (
-              <div>
-                <Link to={role === "technician"
-                  ? "/technicians/profile/me"
-                  : "/users/profile/me"}
-                >
-                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
-                    <img src={user?.photo} className="w-full h-full rounded-full" alt="User" />
-                  </figure>
-                </Link>
-              </div>
-            ) : (
-              <Link to="/login">
-                <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
-                  Login
-                </button>
-              </Link>
-            )}
+{/* Nav Right */}
+<div className="flex items-center gap-4">
+  {token && user ? (
+    <div className="flex items-center gap-2">
+      {/* Greeting */}
+      <span className="text-textColor text-[16px] font-[600]">
+        Hey, {user?.name || "User"}!
+      </span>
 
-            <span className="md:hidden" onClick={toggleMenu}>
-              <BiMenu className="w-6 h-6 cursor-pointer" />
-            </span>
-          </div>
-        </div>
+      {/* Profile Photo */}
+      <Link to={role === "technician" ? "/technicians/profile/me" : "/users/profile/me"}>
+        <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
+        <img 
+  src={
+    user?.photo 
+      ? user.photo 
+      : role === "technician" 
+        ? defaultTechnician 
+        : defaultCustomer
+  }
+  className="w-full h-full rounded-full" 
+  alt="User"
+/>
+        </figure>
+      </Link>
+    </div>
+  ) : (
+    <Link to="/login">
+      <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
+        Login
+      </button>
+    </Link>
+  )}
+
+  <span className="md:hidden" onClick={toggleMenu}>
+    <BiMenu className="w-6 h-6 cursor-pointer" />
+  </span>
+</div>
+
+      </div>
       </div>
     </header>
   );

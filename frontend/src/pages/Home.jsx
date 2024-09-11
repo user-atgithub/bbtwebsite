@@ -274,10 +274,10 @@ const Home = () => {
                         <div className="w-1/2 hidden md:block">
                             <img src={faqImg} alt="" />
                         </div>
-
+c
                         <div className="w-full md:w-1/2">
                             <h2 className="heading">
-                                Most questions by our beloved cusomers
+                                Frequently Asked Questions (FAQ)
                             </h2>
 
                             <FaqList />

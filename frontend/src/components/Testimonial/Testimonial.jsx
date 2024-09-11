@@ -3,9 +3,8 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import StarRatings from 'react-star-ratings';
 import customerAvatar from '../../Assets/images/customer-avatar.png';
-import { HiStar } from 'react-icons/hi';
-import { FaStarHalfAlt } from 'react-icons/fa';
 
 const testimonials = [
   {
@@ -29,24 +28,6 @@ const testimonials = [
     text: "Service was okay, but could use some improvements."
   },
 ];
-
-const getStarComponents = (rating) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-  const emptyStars = 5 - fullStars - halfStar;
-
-  return (
-    <>
-      {[...Array(fullStars)].map((_, index) => (
-        <HiStar key={`full-${index}`} className="text-yellowColor w-[18px] h-5" />
-      ))}
-      {halfStar ? <FaStarHalfAlt className="text-yellowColor w-[18px] h-5" /> : null}
-      {[...Array(emptyStars)].map((_, index) => (
-        <HiStar key={`empty-${index}`} className="text-gray-300 w-[18px] h-5" />
-      ))}
-    </>
-  );
-};
 
 const Testimonial = () => {
   return (
@@ -81,7 +62,16 @@ const Testimonial = () => {
                 {testimonial.name}
               </h4>
               <div className="flex items-center gap-[2px]">
-                {getStarComponents(testimonial.rating)}
+                <StarRatings
+                  rating={testimonial.rating}
+                  starRatedColor="orange"
+                  starDimension="24px"
+                  starSpacing="2px"
+                  numberOfStars={5}
+                  name='rating'
+                  svgIconPath="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  svgIconViewBox="0 0 24 24"
+                />
               </div>
               <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">
                 "{testimonial.text}"

@@ -9,8 +9,9 @@ const Contact = () => {
         contactNumber: '',
         subject: '',
         message: '',
-
     });
+
+    const [errors, setErrors] = useState({});
     const [messageStatus, setMessageStatus] = useState('');
 
     const handleChange = (e) => {
@@ -18,15 +19,42 @@ const Contact = () => {
             ...formData,
             [e.target.id]: e.target.value
         });
+        // Clear the error when user starts typing
+        setErrors({ ...errors, [e.target.id]: '' });
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        const requiredFields = ['name', 'email', 'contactNumber', 'message'];
+        
+        requiredFields.forEach((field) => {
+            if (!formData[field]) {
+                newErrors[field] = `${field} is required`;
+            }
+        });
+
+        return newErrors;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newErrors = validateForm();
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
 
         emailjs.send('service_ofq7keb', 'template_kplgzjk', formData, '-DOGhLMLwNhbIz-Ca')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
                 setMessageStatus('Message sent successfully!');
+                setFormData({
+                    name: '',
+                    email: '',
+                    contactNumber: '',
+                    subject: '',
+                    message: '',
+                });
             }, (err) => {
                 console.log('FAILED...', err);
                 setMessageStatus('Failed to send the message.');
@@ -44,17 +72,20 @@ const Contact = () => {
                     {contactQuestions.map((q, index) => (
                         <div key={index}>
                             <label htmlFor={q.key} className="form__label">
-                                {q.question}
+                                {q.question} {q.required && <span className="text-red-500">*</span>}
                             </label>
                             <input
                                 type="text"
                                 id={q.key}
                                 placeholder={q.placeholder}
-                                className="form__input mt-1"
+                                className={`form__input mt-1 ${errors[q.key] ? 'border-red-500' : ''}`}
                                 value={formData[q.key]}
                                 onChange={handleChange}
-                                required
+                                required={q.required} // Make only required fields mandatory
                             />
+                            {errors[q.key] && (
+                                <p className="text-red-500 text-sm mt-1">{errors[q.key]}</p>
+                            )}
                         </div>
                     ))}
                     <button

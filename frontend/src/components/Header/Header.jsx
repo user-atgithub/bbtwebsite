@@ -1,10 +1,9 @@
 import { useEffect, useRef, useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { BiMenu } from "react-icons/bi";
+import { FaUser } from 'react-icons/fa';  // Importing the FaUser icon
 import { authContext } from '../../Assets/context/authContext';
 import logo from '../../Assets/images/logo.png';
-import defaultCustomer from '../../Assets/images/defaultCustomer.png';
-import defaultTechnician from '../../Assets/images/defaultTechnician.png';
 
 const navLinks = [
   { path: '/home', display: 'Home' },
@@ -73,46 +72,42 @@ const Header = () => {
             </ul>
           </div>
 
-{/* Nav Right */}
-<div className="flex items-center gap-4">
-  {token && user ? (
-    <div className="flex items-center gap-2">
-      {/* Greeting */}
-      <span className="text-textColor text-[16px] font-[600]">
-        Hey, {user?.name || "User"}!
-      </span>
+          {/* Nav Right */}
+          <div className="flex items-center gap-4">
+            {token && user ? (
+              <div className="flex items-center gap-2">
+                {/* Greeting */}
+                <span className="text-textColor text-[16px] font-[600]">
+                  Hey, {user?.name || "User"}!
+                </span>
 
-      {/* Profile Photo */}
-      <Link to={role === "technician" ? "/technicians/profile/me" : "/users/profile/me"}>
-        <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
-        <img 
-  src={
-    user?.photo 
-      ? user.photo 
-      : role === "technician" 
-        ? defaultTechnician 
-        : defaultCustomer
-  }
-  className="w-full h-full rounded-full" 
-  alt="User"
-/>
-        </figure>
-      </Link>
-    </div>
-  ) : (
-    <Link to="/login">
-      <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
-        Login
-      </button>
-    </Link>
-  )}
+                {/* Profile Photo or Icon */}
+                <Link to={role === "technician" ? "/technicians/profile/me" : "/users/profile/me"}>
+                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer flex items-center justify-center bg-gray-200">
+                  {user?.photo ? (
+  <img
+    src={user.photo}
+    className="w-full h-full rounded-full"
+    alt="User"
+  />
+) : (
+  // Person Icon
+  <FaUser className="w-6 h-6 text-black" />
+)}
+                  </figure>
+                </Link>
+              </div>
+            ) : (
+              <Link to="/login">
+                <FaUser className="w-[20px] h-[20px] text-primaryColor cursor-pointer" />  {/* Person Icon */}
+              </Link>
+            )}
 
-  <span className="md:hidden" onClick={toggleMenu}>
-    <BiMenu className="w-6 h-6 cursor-pointer" />
-  </span>
-</div>
-
-      </div>
+            <span className="md:hidden" onClick={toggleMenu}>
+              <BiMenu className="w-6 h-6 cursor-pointer" />
+            </span>
+          </div>
+        </div>
       </div>
     </header>
   );

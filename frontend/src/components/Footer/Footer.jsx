@@ -93,33 +93,36 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Center-aligned Logo, Social Media Links, and Copyright */}
-        <div className="flex flex-col items-center justify-center text-center">
-          {/* Logo centered and resized to 1/2 of its original size */}
-          <div className="mb-4">
-            <img src={logo} alt="Logo" className="w-1/2 mx-auto" />
-          </div>
+{/* Center-aligned Logo, Social Media Links, and Copyright */}
+<div className="flex flex-col items-center justify-center text-center">
+  {/* Logo centered and resized to 1/2 of its original size */}
+  <div className="mb-4">
+    <Link to="/home">
+      <img src={logo} alt="Logo" className="w-1/2 mx-auto" />
+    </Link>
+  </div>
 
-          {/* Social Media Icons */}
-          <div className="flex gap-4 mb-4">
-            {socialLinks.map((link, index) => (
-              <a 
-                href={link.path} 
-                key={index} 
-                className="w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {link.icon}
-              </a>
-            ))}
-          </div>
+  {/* Social Media Icons */}
+  <div className="flex gap-4 mb-4">
+    {socialLinks.map((link, index) => (
+      <a 
+        href={link.path} 
+        key={index} 
+        className="w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {link.icon}
+      </a>
+    ))}
+  </div>
 
-          {/* Copyright Text */}
-          <p className="text-center text-[16px] leading-7 font-[400] text-textColor">
-            Copyright © {year} developed by Bhuvnesh Magon. All rights reserved.
-          </p>
-        </div>
+  {/* Copyright Text */}
+  <p className="text-center text-[16px] leading-7 font-[400] text-textColor">
+    Copyright © {year} developed by Bhuvnesh Magon. All rights reserved.
+  </p>
+</div>
+
       </div>
     </footer>
   );

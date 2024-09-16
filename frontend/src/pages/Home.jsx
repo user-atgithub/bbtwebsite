@@ -47,35 +47,35 @@ const Home = () => {
 
                                 <button className='btn' onClick={handleClick}>Request an Appointment</button> {/* Update button */}
                             </div>
+{/*======hero======*/}
+<div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
+    <div>
+        <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+            {new Date().getFullYear() - 2012}+
+        </h2>
+        <span className="w-[100px] h-2 bg-yellowColor rounded-full block mt-[-14px]">                                        </span>
+        <p className="text__para">Years of Experience</p>
+    </div>
 
-                            {/*======hero======*/}
-                            <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
-                                <div>
-                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-                                        30+
-                                    </h2>
-                                    <span className="w-[100px] h-2 bg-yellowColor rounded-full block mt-[-14px]">                                        </span>
-                                    <p className="text__para">Years of Experience</p>
-                                </div>
+    <div>
+        <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+            02+
+        </h2>
+        <span className="w-[100px] h-2 bg-purpleColor rounded-full block mt-[-14px]">                                        </span>
+        <p className="text__para">Garage Locations</p>
+    </div>
 
-                                <div>
-                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-                                        15+
-                                    </h2>
-                                    <span className="w-[100px] h-2 bg-purpleColor rounded-full block mt-[-14px]">                                        </span>
-                                    <p className="text__para">Garage Locations</p>
-                                </div>
+    <div>
+        <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+            100%
+        </h2>
+        <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px]">                                        </span>
+        <p className="text__para">Customer Satisfaction</p>
+    </div>
+    </div>
+    </div>
+{/*======hero content======*/}
 
-                                <div>
-                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-                                        100%
-                                    </h2>
-                                    <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px]">                                        </span>
-                                    <p className="text__para">Customer Satisfaction</p>
-                                </div>
-                            </div>
-                        </div>
-                        {/*======hero content======*/}
 
                         <div className="flex gap-[30px] justify-end">
                             <div>

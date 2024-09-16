@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import emailjs from 'emailjs-com';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { contactQuestions } from '../Assets/data/contactQuestions.js';
 
 const Contact = () => {
@@ -13,20 +14,21 @@ const Contact = () => {
 
     const [errors, setErrors] = useState({});
     const [messageStatus, setMessageStatus] = useState('');
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.id]: e.target.value
         });
-        // Clear the error when user starts typing
         setErrors({ ...errors, [e.target.id]: '' });
     };
 
     const validateForm = () => {
         const newErrors = {};
         const requiredFields = ['name', 'email', 'contactNumber', 'message'];
-        
+
         requiredFields.forEach((field) => {
             if (!formData[field]) {
                 newErrors[field] = `${field} is required`;
@@ -34,6 +36,10 @@ const Contact = () => {
         });
 
         return newErrors;
+    };
+
+    const handleRecaptcha = (token) => {
+        setRecaptchaToken(token);
     };
 
     const handleSubmit = (e) => {
@@ -44,7 +50,14 @@ const Contact = () => {
             return;
         }
 
-        emailjs.send('service_ofq7keb', 'template_kplgzjk', formData, '-DOGhLMLwNhbIz-Ca')
+        if (!recaptchaToken) {
+            setErrors({ recaptcha: 'Please complete the reCAPTCHA' });
+            return;
+        }
+
+        setLoading(true);
+
+        emailjs.send('service_ofq7keb', 'template_kplgzjk', { ...formData, recaptchaToken }, import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
                 setMessageStatus('Message sent successfully!');
@@ -55,47 +68,75 @@ const Contact = () => {
                     subject: '',
                     message: '',
                 });
+                setRecaptchaToken(null);
+                setErrors({});
             }, (err) => {
                 console.log('FAILED...', err);
                 setMessageStatus('Failed to send the message.');
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
-        <section>
-            <div className="px-4 mx-auto max-w-screen-md">
-                <h2 className="heading text-center">Contact Us</h2>
-                <p className="mb-8 lg:mb-16 font-light text-center text_para">
+        <section style={{ padding: '20px' }}>
+            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                <h2 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '20px' }}>Contact Us</h2>
+                <p style={{ textAlign: 'center', marginBottom: '20px' }}>
                     Got a technical issue? Want to send feedback about a beta feature? Let us know.
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     {contactQuestions.map((q, index) => (
                         <div key={index}>
-                            <label htmlFor={q.key} className="form__label">
-                                {q.question} {q.required && <span className="text-red-500">*</span>}
+                            <label htmlFor={q.key} style={{ display: 'block', marginBottom: '8px' }}>
+                                {q.question} {q.required && <span style={{ color: 'red' }}>*</span>}
                             </label>
                             <input
                                 type="text"
                                 id={q.key}
                                 placeholder={q.placeholder}
-                                className={`form__input mt-1 ${errors[q.key] ? 'border-red-500' : ''}`}
+                                style={{
+                                    width: '100%',
+                                    padding: '8px',
+                                    border: '1px solid',
+                                    borderColor: errors[q.key] ? 'red' : '#ccc',
+                                    borderRadius: '4px'
+                                }}
                                 value={formData[q.key]}
                                 onChange={handleChange}
-                                required={q.required} // Make only required fields mandatory
+                                required={q.required}
                             />
                             {errors[q.key] && (
-                                <p className="text-red-500 text-sm mt-1">{errors[q.key]}</p>
+                                <p style={{ color: 'red', fontSize: '14px', marginTop: '4px' }}>{errors[q.key]}</p>
                             )}
                         </div>
                     ))}
-                    <button
-                        type="submit"
-                        className="btn rounded sm:w-fit"
-                    >
-                        Submit
-                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <ReCAPTCHA
+                            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // Use Vite environment variable
+                            onChange={handleRecaptcha}
+                            style={{ marginRight: '10px' }}
+                        />
+                        <button
+                            type="submit"
+                            style={{
+                                padding: '10px 20px',
+                                backgroundColor: '#007bff',
+                                color: '#fff',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                opacity: loading ? 0.6 : 1,
+                                pointerEvents: loading ? 'none' : 'auto',
+                            }}
+                        >
+                            {loading ? 'Sending...' : 'Submit'}
+                        </button>
+                    </div>
+                    {errors.recaptcha && (
+                        <p style={{ color: 'red', fontSize: '14px', marginTop: '4px' }}>{errors.recaptcha}</p>
+                    )}
+                    {messageStatus && <p style={{ textAlign: 'center', color: messageStatus.includes('success') ? 'green' : 'red', marginTop: '16px' }}>{messageStatus}</p>}
                 </form>
-                {messageStatus && <p>{messageStatus}</p>}
             </div>
         </section>
     );

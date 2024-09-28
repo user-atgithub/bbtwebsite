@@ -36,7 +36,7 @@ const Home = () => {
                         <div>
                             <div className="lg:w-[570px]">
                                 <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]">
-                                    Because they are not cars, they are emotions.
+                                    Because they are not just cars, they are emotions.
                                 </h1>
                                 <p className="text__para text-justify">
                                     We specialize in a range of installations to upgrade your car's style and functionality, including

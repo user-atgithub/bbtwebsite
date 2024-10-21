@@ -33,7 +33,7 @@ const quickLinks01 = [
 const quickLinks02 = [
   { path: "/technicians", display: "Find a Technician" },
   { path: "/login", display: "Request an Appointment" },
-  { path: "/", display: "Find a Location" },
+  { path: "/contact", display: "Find a Location" },
   { path: "/contact", display: "Get an Opinion" },
 ];
 

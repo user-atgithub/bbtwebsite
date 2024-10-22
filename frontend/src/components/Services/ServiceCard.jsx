@@ -1,11 +1,12 @@
-import { BsArrowRight } from 'react-icons/bs'
-import { Link } from "react-router-dom"
+import { BsArrowRight } from 'react-icons/bs';
+import { Link } from "react-router-dom";
+import '../../App.css'; // Import the CSS file for the keyframe animations
 
 const ServiceCard = ({ item, index }) => {
-    const { name, desc, bgColor, textColor } = item
+    const { name, desc, bgColor, textColor } = item;
 
     return (
-        <div className="relative p-6 bg-white shadow-lg rounded-lg flex flex-col h-[300px]">
+        <div className="service-card relative p-6 bg-white shadow-lg rounded-lg flex flex-col h-[300px]">
             <div className="flex flex-col flex-grow mb-14">
                 <h2 className="text-xl font-bold text-headingColor mb-4">
                     {name}
@@ -32,7 +33,7 @@ const ServiceCard = ({ item, index }) => {
                 </span>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ServiceCard
+export default ServiceCard;

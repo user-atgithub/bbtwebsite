@@ -9,6 +9,7 @@ const navLinks = [
   { path: '/home', display: 'Home' },
   { path: '/technicians', display: 'Find a Technician' },
   { path: '/services', display: 'Services' },
+  { path: '/reviews', display: 'Reviews' },
   { path: '/contact', display: 'Contact' },
 ];
 

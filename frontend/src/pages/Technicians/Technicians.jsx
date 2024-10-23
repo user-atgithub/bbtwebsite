@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import TechnicianCard from './../../components/Technicians/TechnicianCard';
-import Testimonial from '../../components/Testimonial/Testimonial';
+import Review from '../../components/Review/Review';
 import { BASE_URL } from "./../../config.js";
 import useFetchData from "./../../hooks/useFetchData.jsx";
 import Loader from "../../components/Loader/Loading.jsx";
@@ -73,7 +73,7 @@ const Technicians = () => {
                         </p>
                     </div>
 
-                    <Testimonial />
+                    <Review />
                 </div>
             </section>
         </>

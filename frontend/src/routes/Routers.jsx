@@ -7,6 +7,7 @@ import Technicians from '../pages/Technicians/Technicians';
 import TechnicianDetails from '../pages/Technicians/TechnicianDetails';
 import MyAccount from "../Dashboard/user-account/MyAccount";
 import Dashboard from '../Dashboard/technician-account/Dashboard';
+import Reviews from '../pages/Reviews'; 
 import CheckoutSuccess from '../pages/CheckoutSuccess';
 import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
@@ -23,6 +24,7 @@ const Routers = () => {
       <Route path="/Contact" element={<Contact />} />
       <Route path="/Services" element={<Services />} />
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
+      <Route path="/reviews" element={<Reviews />} />
       <Route path="/users/profile/me" element={<ProtectedRoute allowedRoles={['customer']}><MyAccount /></ProtectedRoute>} />
       <Route path="/technicians/profile/me" element={<ProtectedRoute allowedRoles={['technician']}><Dashboard /></ProtectedRoute>} />
     </Routes>

@@ -16,7 +16,7 @@ import { BsArrowRight } from "react-icons/bs"
 import About from '../components/About/About'
 import ServiceList from '../components/Services/ServiceList'
 import TechnicianList from '../components/Technicians/TechnicianList'
-import Testimonial from '../components/Testimonial/Testimonial'
+import Review from '../components/Review/Review'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -287,7 +287,7 @@ const Home = () => {
                 </div>
             </section>
             {/*======faq section end======*/}
-            {/*======testimonial======*/}
+            {/*======review======*/}
             <section>
                 <div className="container">
                 <div className="xl:w-[470px] mx-auto">
@@ -298,10 +298,10 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <Testimonial />
+                    <Review />
                 </div>
             </section>
-            {/*======testimonial end======*/}
+            {/*======review end======*/}
         </>
     )
 }

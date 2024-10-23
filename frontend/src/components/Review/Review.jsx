@@ -1,49 +1,11 @@
 import React, { useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import customerAvatar from '../../Assets/images/customer-avatar.png';
-
-const testimonials = [
-  {
-    name: "Muhibur Rahman",
-    rating: 4.5,
-    text: "I have taken ambient lights service from them. They treat so well and they are providing the best car mod services.",
-    date: "2024-10-20"
-  },
-  {
-    name: "John Doe",
-    rating: 4.5,
-    text: "Great service but there is room for improvement.",
-    date: "2024-10-19"
-  },
-  {
-    name: "Jane Smith",
-    rating: 5.0,
-    text: "Excellent service! Exceeded my expectations.",
-    date: "2024-10-18"
-  },
-  {
-    name: "Alice Johnson",
-    rating: 4.0,
-    text: "Service was okay, but could use some improvements.",
-    date: "2024-10-17"
-  },  
-  {
-    name: "Muhibur Rahman",
-    rating: 4.5,
-    text: "I have taken ambient lights service from them. They treat so well and they are providing the best car mod services.",
-    date: "2024-10-20"
-  },
-  {
-    name: "John Doe",
-    rating: 4.5,
-    text: "Great service but there is room for improvement.",
-    date: "2024-10-19"
-  },
-];
+import reviews from '../../Assets/data/reviews'; // Import the reviews
 
 const MAX_LENGTH = 100; // Maximum length for the review before truncation
 
-const Testimonial = () => {
+const Review = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleToggleExpand = (index) => {
@@ -52,22 +14,22 @@ const Testimonial = () => {
 
   return (
     <div className='mt-[30px] lg:mt-[55px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-      {testimonials.map((testimonial, index) => (
+      {reviews.map((review, index) => (
         <div key={index} className="border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg">
           <div className="flex items-center gap-3">
             <img src={customerAvatar} alt='' className="w-12 h-12 rounded-full" />
             <div>
               <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                {testimonial.name}
+                {review.name}
               </h4>
               <span className="text-[16px] leading-[30px] text-headingColor">
-                {new Date(testimonial.date).toLocaleDateString()}
+                {new Date(review.date).toLocaleDateString()}
               </span>
             </div>
           </div>
           <div className="flex items-center mt-2">
             <StarRatings
-              rating={testimonial.rating}
+              rating={review.rating}
               starRatedColor="orange"
               starDimension="24px"
               starSpacing="2px"
@@ -79,12 +41,12 @@ const Testimonial = () => {
           </div>
           <p className="text-[16px] leading-7 mt-4 text-textColor font-[400] text-justify">
             {expandedIndex === index 
-              ? testimonial.text 
-              : testimonial.text.length > MAX_LENGTH 
-                ? `${testimonial.text.substring(0, MAX_LENGTH)}...` 
-                : testimonial.text
+              ? review.text 
+              : review.text.length > MAX_LENGTH 
+                ? `${review.text.substring(0, MAX_LENGTH)}...` 
+                : review.text
             }
-            {testimonial.text.length > MAX_LENGTH && (
+            {review.text.length > MAX_LENGTH && (
               <button 
                 className="text-blue-500 cursor-pointer ml-2"
                 onClick={() => handleToggleExpand(index)}
@@ -99,4 +61,4 @@ const Testimonial = () => {
   );
 };
 
-export default Testimonial;
+export default Review;

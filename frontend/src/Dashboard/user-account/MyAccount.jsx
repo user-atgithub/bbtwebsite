@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 import { authContext } from "../../Assets/context/authContext.jsx";
 import MyBookings from "./MyBookings.jsx";
 import Profile from "./Profile.jsx";
@@ -10,27 +11,42 @@ import Error from "../../components/Error/Error.jsx";
 const MyAccount = () => {
     const { dispatch } = useContext(authContext);
     const [tab, setTab] = useState('bookings');
+    const navigate = useNavigate();
 
     const { data: userData, loading, error } = useGetProfile(`${BASE_URL}/users/profile/me`);
-
-    console.log(userData, "userdata");
 
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
     };
 
-    if (loading) {
-        return <Loading />;
-    }
+    const handleDeleteAccount = async () => {
+        if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            try {
+                const response = await fetch(`${BASE_URL}/users/${userData._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`, // Assuming JWT is stored in localStorage
+                    },
+                });
 
-    if (error) {
-        return <Error errMessage={error} />;
-    }
+                const result = await response.json();
+                if (result.success) {
+                    alert("Account deleted successfully.");
+                    dispatch({ type: "LOGOUT" }); // Log out the user after deletion
+                    navigate("/"); // Redirect to home page or login after deletion
+                } else {
+                    alert("Failed to delete account: " + result.message);
+                }
+            } catch (err) {
+                console.error("Error deleting account:", err);
+                alert("An error occurred while trying to delete the account.");
+            }
+        }
+    };
 
-    // Ensure userData is not null or undefined before accessing its properties
-    if (!userData) {
-        return <Error errMessage="User data not found" />;
-    }
+    if (loading) return <Loading />;
+    if (error) return <Error errMessage={error} />;
+    if (!userData) return <Error errMessage="User data not found" />;
 
     return (
         <section>
@@ -56,7 +72,7 @@ const MyAccount = () => {
                             <p className="text-textColor text-[15px] leading-6 font-medium">
                                 Car Name:
                                 <span className="ml-2 text-headingColor text-[15px] leading-6">
-                                    {userData.carName|| 'Car name not available'}
+                                    {userData.carName || 'Car name not available'}
                                 </span>
                             </p>
                         </div>
@@ -67,7 +83,10 @@ const MyAccount = () => {
                             >
                                 Logout
                             </button>
-                            <button className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">
+                            <button
+                                onClick={handleDeleteAccount}
+                                className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white"
+                            >
                                 Delete account
                             </button>
                         </div>

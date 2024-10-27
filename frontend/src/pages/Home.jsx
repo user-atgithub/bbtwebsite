@@ -35,7 +35,7 @@ const Home = () => {
                         {/*======hero content======*/}
                         <div>
                             <div className="lg:w-[570px]">
-                                <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]">
+                                <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px] text-justify">
                                     Because they are not just cars, they are emotions.
                                 </h1>
                                 <p className="text__para text-justify">
@@ -93,7 +93,7 @@ const Home = () => {
 
             <section>
                 <div className="container">
-                    <div className="lg:w-[470px] mx-auto">
+                    <div className="lg:w-[700px] mx-auto">
                         <h2 className="heading text-center">
                             Providing the best services
                         </h2>
@@ -177,20 +177,6 @@ const Home = () => {
 
             <About />
 
-            {/*======services section======*/}
-            <section>
-                <div className="container">
-                    <div className="xl:w-[470px] mx-auto">
-                        <h2 className="heading text-center">Our Car Modification Services</h2>
-                        <p className="text__para text-center">
-                        Exceptional craftsmanship for your ride. Our services deliver unparalleled expertise in auto modifications.
-                        </p>
-                    </div>
-                    <ServiceList />
-                </div>
-            </section >
-            {/*======services section end======*/}
-
  {/*======feature section======*/}
 <section>
     <div className="container">
@@ -251,21 +237,6 @@ const Home = () => {
     </div>
 </section>
 {/*======feature section end======*/}
-            {/*======our great technicians======*/}
-            <section>
-                <div className="container">
-                    <div className="xl:w-[470px] mx-auto">
-                        <h2 className="heading text-center">Our great technician services</h2>
-                        <p className="text__para text-center">
-                            World-class care for everyone.
-                            Our services offer unmatched expert auto mods.
-                        </p>
-                    </div>
-
-                    <TechnicianList />
-                </div>
-            </section>
-            {/*======our great technicians======*/}
 
             {/*======faq section======*/}
             <section>
@@ -290,7 +261,7 @@ const Home = () => {
             {/*======review======*/}
             <section>
                 <div className="container">
-                <div className="xl:w-[470px] mx-auto">
+                <div className="xl:w-[700px] mx-auto">
                         <h2 className="heading text-center">What our customer say</h2>
                         <p className="text__para text-center">
                             World-class care for everyone.

@@ -12,6 +12,11 @@ const Tabs = ({ tab, setTab }) => {
     navigate("/");
   };
 
+  const handleDeleteAccount = () => {
+    // Show message to contact administrator
+    alert("Contact administrator");
+  };
+
   return (
     <div>
       <span className="lg:hidden">
@@ -55,7 +60,10 @@ const Tabs = ({ tab, setTab }) => {
           >
             Logout
           </button>
-          <button className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">
+          <button 
+            onClick={handleDeleteAccount} 
+            className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white"
+          >
             Delete account
           </button>
         </div>

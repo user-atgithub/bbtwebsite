@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import TechnicianCard from './../../components/Technicians/TechnicianCard';
-import Review from '../../components/Review/Review';
 import { BASE_URL } from "./../../config.js";
 import useFetchData from "./../../hooks/useFetchData.jsx";
 import Loader from "../../components/Loader/Loading.jsx";
@@ -60,20 +59,6 @@ const Technicians = () => {
                             )}
                         </>
                     )}
-                </div>
-            </section>
-
-            <section>
-                <div className="container">
-                    <div className="xl:w-[470px] mx-auto">
-                        <h2 className="heading text-center">What our customer say</h2>
-                        <p className="text__para text-center">
-                            World-class care for everyone.
-                            Our services offer unmatched expert auto mods.
-                        </p>
-                    </div>
-
-                    <Review />
                 </div>
             </section>
         </>

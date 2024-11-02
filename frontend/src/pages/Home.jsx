@@ -258,21 +258,7 @@ const Home = () => {
                 </div>
             </section>
             {/*======faq section end======*/}
-            {/*======review======*/}
-            <section>
-                <div className="container">
-                <div className="xl:w-[700px] mx-auto">
-                        <h2 className="heading text-center">What our customer say</h2>
-                        <p className="text__para text-center">
-                            World-class care for everyone.
-                            Our services offer unmatched expert auto mods.
-                        </p>
-                    </div>
-
-                    <Review />
-                </div>
-            </section>
-            {/*======review end======*/}
+           
         </>
     )
 }

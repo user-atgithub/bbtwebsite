@@ -5,14 +5,14 @@ import { BASE_URL } from "../../config";
 import HashLoader from 'react-spinners/HashLoader';
 import { toast } from "react-toastify";
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ onFeedbackSubmit }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
-  const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+  const token = localStorage.getItem('token');
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
@@ -28,12 +28,12 @@ const FeedbackForm = () => {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Make sure the token is included and valid
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ rating, reviewText }),
       });
 
-      const result = await res.json(); // Corrected from 'jason' to 'json'
+      const result = await res.json();
 
       if (!res.ok) {
         throw new Error(result.message);
@@ -41,6 +41,9 @@ const FeedbackForm = () => {
 
       setLoading(false);
       toast.success(result.message);
+      
+      // Trigger thank-you message display in Feedback component
+      onFeedbackSubmit();
     } catch (err) {
       setLoading(false);
       toast.error(err.message);

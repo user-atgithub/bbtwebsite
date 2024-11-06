@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import customerAvatar from '../../Assets/images/customer-avatar.png';
 import reviews from '../../Assets/data/reviews';
+import '../../App.css'; // Import the CSS file for the keyframe animations
 
 const MAX_LENGTH = 100;
 
@@ -90,7 +91,7 @@ const Review = () => {
       {/* Reviews display */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentReviews.map((review, index) => (
-          <div key={index} className="border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg">
+          <div key={index} className="review-card border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg hover:scale-105 transform">
             <div className="flex items-center gap-3">
               <img src={customerAvatar} alt="" className="w-12 h-12 rounded-full" />
               <div>

@@ -117,3 +117,37 @@ body {
       border-image-source: linear-gradient(225deg, rgba(255, 0, 255, 0.6), rgba(255, 255, 0, 0.6), rgba(0, 255, 255, 0.6));
   }
 }
+
+/* Default state for all review cards */
+.review-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 2px solid transparent;
+}
+
+/* Add a subtle grow effect and colorful blurred border on hover */
+.review-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, rgba(255, 0, 255, 0.6), rgba(0, 255, 255, 0.6), rgba(255, 255, 0, 0.6)) 1;
+  animation: blur-border 30s linear infinite;
+}
+
+/* Create a smooth, continuous blurred border animation */
+@keyframes blur-border {
+  0% {
+      border-image-source: linear-gradient(45deg, rgba(255, 0, 255, 0.6), rgba(0, 255, 255, 0.6), rgba(255, 255, 0, 0.6));
+  }
+  25% {
+      border-image-source: linear-gradient(90deg, rgba(0, 255, 255, 0.6), rgba(255, 255, 0, 0.6), rgba(255, 0, 255, 0.6));
+  }
+  50% {
+      border-image-source: linear-gradient(135deg, rgba(255, 255, 0, 0.6), rgba(255, 0, 255, 0.6), rgba(0, 255, 255, 0.6));
+  }
+  75% {
+      border-image-source: linear-gradient(180deg, rgba(0, 255, 255, 0.6), rgba(255, 0, 255, 0.6), rgba(255, 255, 0, 0.6));
+  }
+  100% {
+      border-image-source: linear-gradient(225deg, rgba(255, 0, 255, 0.6), rgba(255, 255, 0, 0.6), rgba(0, 255, 255, 0.6));
+  }
+}

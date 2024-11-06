@@ -1,16 +1,25 @@
+import React, { useState } from 'react';
 import convertTime from "../../utils/convertTime";
 import { BASE_URL, token } from './../../config';
 import { toast } from 'react-toastify';
 
 const SidePanel = ({ technicianId, ticketPrice, timeSlots }) => {
+  const [isGuestCheckout, setIsGuestCheckout] = useState(false);
+  const [guestEmail, setGuestEmail] = useState('');
+
   const bookingHandler = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/bookings/checkout-session/${technicianId}`, {
+      const endpoint = isGuestCheckout ? '/guest-checkout-session' : '/checkout-session';
+      const headers = isGuestCheckout
+        ? { 'Content-Type': 'application/json' }
+        : { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
+
+      const res = await fetch(`${BASE_URL}/bookings${endpoint}/${technicianId}`, {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: headers,
+        body: isGuestCheckout ? JSON.stringify({ email: guestEmail }) : null,
       });
+
       const data = await res.json();
       if (!res.ok) {
         throw new Error(`${data.message} Please try again`);
@@ -49,7 +58,43 @@ const SidePanel = ({ technicianId, ticketPrice, timeSlots }) => {
           ))}
         </ul>
       </div>
-      <button onClick={bookingHandler} className="btn px-2 w-full rounded-md">
+
+      {/* Guest checkout option */}
+      <div className="mt-4">
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={isGuestCheckout}
+            onChange={(e) => setIsGuestCheckout(e.target.checked)}
+            className="checkbox"
+          />
+          <span className="text-sm font-semibold">Checkout as Guest</span>
+        </label>
+
+        {/* Show email input if guest checkout is selected */}
+        {isGuestCheckout && (
+          <div className="mt-3">
+            <label htmlFor="guestEmail" className="text-sm font-semibold">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="guestEmail"
+              value={guestEmail}
+              onChange={(e) => setGuestEmail(e.target.value)}
+              className="input w-full mt-1 px-2 py-1 border rounded-md"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+        )}
+      </div>
+
+      <button
+        onClick={bookingHandler}
+        className="btn px-2 w-full rounded-md mt-4"
+        disabled={isGuestCheckout && !guestEmail} // Disable if guest email is empty
+      >
         Book Appointment
       </button>
     </div>

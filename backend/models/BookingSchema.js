@@ -10,10 +10,9 @@ const bookingSchema = new mongoose.Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false, // Make optional for guest bookings
     },
     ticketPrice: { type: String, required: true },
-
     status: {
       type: String,
       enum: ["pending", "approved", "cancelled"],
@@ -27,12 +26,12 @@ const bookingSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-bookingSchema.pre(/^find/, function (next){
+bookingSchema.pre(/^find/, function (next) {
   this.populate("user").populate({
-    path:"technician",
-    select:"name",
-  })
-next();
-})
+    path: "technician",
+    select: "name",
+  });
+  next();
+});
 
 export default mongoose.model("Booking", bookingSchema);

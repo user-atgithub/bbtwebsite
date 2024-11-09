@@ -13,13 +13,13 @@
         @apply max-w-full w-[1440px] px-5 mx-auto;
     }
     .box_style {
-        border: 1px solid #d1d5db; /* Example border color */
-        padding: 10px; /* Example padding */
-        border-radius: 4px; /* Example border radius */
-        background-color: #f9fafb; /* Example background color */
-        width: 100%; /* Full width of the container */
-        box-sizing: border-box; /* Include padding and border in element's width and height */
-        margin-top: 8px; /* Space between label and input box */
+        border: 1px solid #d1d5db;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #f9fafb;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 8px;
     }
     
     .btn {
@@ -39,7 +39,19 @@
     }
 
     .hero__section {
-        @apply bg-[url('./Assets/images/hero-bg.png')] bg-no-repeat bg-center bg-cover;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero__section video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.8;
     }
 
     .form__label {

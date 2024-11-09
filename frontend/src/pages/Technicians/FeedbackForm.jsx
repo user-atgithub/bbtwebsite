@@ -54,7 +54,7 @@ const FeedbackForm = ({ onFeedbackSubmit }) => {
     <form onSubmit={handleSubmitReview}>
       <div>
         <h3 className="text-headingColor text-[16px] leading-6 font-semibold mb-4 mt-0">
-          How would you rate the overall experience?*
+          How would you rate the overall experience?<span className="text-red-500">*</span>
         </h3>
         <div>
           {[...Array(5).keys()].map((_, index) => {
@@ -84,7 +84,7 @@ const FeedbackForm = ({ onFeedbackSubmit }) => {
       </div>
       <div className="mt-[30px]">
         <h3 className="text-headingColor text-[16px] leading-6 font-semibold mb-4 mt-0">
-          Share your feedback or suggestions*
+          Share your feedback or suggestions<span className="text-red-500">*</span>
         </h3>
         <textarea
           className="border border-solid border-[#0066ff34] focus:outline-none focus:outline-primaryColor w-full px-3 py-3 rounded-md"

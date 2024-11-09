@@ -1,19 +1,17 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import heroImg01 from "../Assets/images/hero-img01.png"
-import heroImg02 from "../Assets/images/hero-img02.png"
-import heroImg03 from "../Assets/images/hero-img03.png"
-import icon01 from "../Assets/images/icon01.png"
-import icon02 from "../Assets/images/icon02.png"
-import icon03 from "../Assets/images/icon03.png"
-import featureImg from "../Assets/images/feature-img.png"
-import faqImg from "../Assets/images/faq-img.png"
-import FaqList from '../components/Faq/FaqList'
-import videoIcon from "../Assets/images/video-icon.png"
-import avatarIcon from "../Assets/images/avatar-icon.png"
-import { Link } from "react-router-dom"
-import { BsArrowRight } from "react-icons/bs"
-import About from '../components/About/About'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import heroVideo from "../Assets/videos/hero-video.mp4";
+import icon01 from "../Assets/images/icon01.png";
+import icon02 from "../Assets/images/icon02.png";
+import icon03 from "../Assets/images/icon03.png";
+import featureImg from "../Assets/images/feature-img.png";
+import faqImg from "../Assets/images/faq-img.png";
+import FaqList from '../components/Faq/FaqList';
+import videoIcon from "../Assets/images/video-icon.png";
+import avatarIcon from "../Assets/images/avatar-icon.png";
+import { Link } from "react-router-dom";
+import { BsArrowRight } from "react-icons/bs";
+import About from '../components/About/About';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -25,9 +23,24 @@ const Home = () => {
     return (
         <>
             {/*======hero section======*/}
-
             <section className="hero__section pt-[60px] 2xl:h-[800px]">
-                <div className="container">
+                {/* Background video */}
+                <video
+    autoPlay
+    muted
+    playsInline
+    className="w-full h-full object-cover"
+    onEnded={(e) => {
+        e.target.currentTime = e.target.duration; // Force video to stay at the last frame
+        e.target.pause(); // Ensure the video is paused
+    }}
+>
+    <source src={heroVideo} type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
+
+                <div className="container relative z-10">
                     <div className="flex flex-col lg:flex-row gap-[90px] items-center justify-between">
                         {/*======hero content======*/}
                         <div>
@@ -42,45 +55,34 @@ const Home = () => {
                                     and skills to ensure hassle-free installations that perfectly reflect your personality. Whether you want to enhance your listening experience, add a sporty touch, or protect yourself on the road, we've got you covered.
                                 </p>
 
-                                <button className='btn' onClick={handleClick}>Request an Appointment</button> {/* Update button */}
+                                <button className='btn' onClick={handleClick}>Request an Appointment</button>
                             </div>
-{/*======hero======*/}
-<div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
-    <div>
-        <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-            {new Date().getFullYear() - 2012}+
-        </h2>
-        <span className="w-[100px] h-2 bg-yellowColor rounded-full block mt-[-14px]">                                        </span>
-        <p className="text__para">Years of Experience</p>
-    </div>
 
-    <div>
-        <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-            02+
-        </h2>
-        <span className="w-[100px] h-2 bg-purpleColor rounded-full block mt-[-14px]">                                        </span>
-        <p className="text__para">Garage Locations</p>
-    </div>
+                            {/*======hero stats======*/}
+                            <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
+                                <div>
+                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+                                        {new Date().getFullYear() - 2012}+
+                                    </h2>
+                                    <span className="w-[100px] h-2 bg-yellowColor rounded-full block mt-[-14px]"></span>
+                                    <p className="text__para">Years of Experience</p>
+                                </div>
 
-    <div>
-        <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-            100%
-        </h2>
-        <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px]">                                        </span>
-        <p className="text__para">Customer Satisfaction</p>
-    </div>
-    </div>
-    </div>
-{/*======hero content======*/}
+                                <div>
+                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+                                        02+
+                                    </h2>
+                                    <span className="w-[100px] h-2 bg-purpleColor rounded-full block mt-[-14px]"></span>
+                                    <p className="text__para">Garage Locations</p>
+                                </div>
 
-
-                        <div className="flex gap-[30px] justify-end">
-                            <div>
-                                <img className="w-full" src={heroImg01} alt="" />
-                            </div>
-                            <div className="mt-[30px]">
-                                <img src={heroImg02} alt="" className="w-full mb-[30px]" />
-                                <img src={heroImg03} alt="" className="w-full" />
+                                <div>
+                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+                                        100%
+                                    </h2>
+                                    <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px]"></span>
+                                    <p className="text__para">Customer Satisfaction</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,139 +103,81 @@ const Home = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]">
-                        <div className="py-[30px] px-5 ">
-                            <div className="flex items-center justify-center">
-                                <img src={icon01} alt="" />
+                        {/* Service Cards */}
+                        {[{icon: icon01, title: 'Find a Technician', link: '/technicians'},
+                          {icon: icon02, title: 'Find a Location', link: '/contact'},
+                          {icon: icon03, title: 'Book Appointment', link: '/technicians'}]
+                        .map(({icon, title, link}, index) => (
+                            <div className="py-[30px] px-5" key={index}>
+                                <div className="flex items-center justify-center">
+                                    <img src={icon} alt="" />
+                                </div>
+                                <div className="mt-[30px]">
+                                    <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">{title}</h2>
+                                    <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                                        World-class service for everyone. We offer unmatched, professional car modifications.
+                                    </p>
+                                    <Link to={link}
+                                        className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none">
+                                        <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                                    </Link>
+                                </div>
                             </div>
-
-                            <div className="mt-[30px]">
-                                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
-                                    Find a Technician
-                                </h2>
-                                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                                    World-class service for everyone. We offer unmatched,
-                                    professional car modifications.
-                                </p>
-
-                                <Link
-                                    to="/technicians"
-                                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
-                                >
-                                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div className="py-[30px] px-5 ">
-                            <div className="flex items-center justify-center">
-                                <img src={icon02} alt="" />
-                            </div>
-
-                            <div className="mt-[30px]">
-                                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
-                                    Find a Location
-                                </h2>
-                                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                                    World-class service for everyone. We offer unmatched,
-                                    professional car modifications.
-                                </p>
-
-                                <Link
-                                    to="/contact"
-                                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
-                                >
-                                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                                </Link>
-                            </div>
-                        </div><div className="py-[30px] px-5 ">
-                            <div className="flex items-center justify-center">
-                                <img src={icon03} alt="" />
-                            </div>
-
-                            <div className="mt-[30px]">
-                                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
-                                    Book Appointment
-                                </h2>
-                                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                                    World-class service for everyone. We offer unmatched,
-                                    professional car modifications.
-                                </p>
-
-                                <Link
-                                    to="/technicians"
-                                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
-                                >
-                                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                                </Link>
-                            </div>
-                        </div>
-
+                        ))}
                     </div>
                 </div>
             </section>
 
             <About />
 
- {/*======feature section======*/}
-<section>
-    <div className="container">
-        <div className="flex items-center justify-between flex-col lg:flex-row">
-            {/*======feature content======*/}
-            <div className="xl:w-[670px]">
-                <h2 className="heading">
-                    Get virtual guidance <br /> anytime.
-                </h2>
-                <ul className="pl-4">
-                    <li className="text__para text-justify">
-                        1. Drop an email to our technician directly.
-                    </li>
-                    <li className="text__para text-justify">
-                        2. Search for your technician here, and contact them directly.
-                    </li>
-                    <li className="text__para text-justify">
-                        3. Schedule the appointment directly, use the online scheduling tool to select an appointment time.
-                    </li>
-                </ul>
-                <Link to="/">
-                    <button className="btn">Learn More</button>
-                </Link>
-            </div>
-
-            {/*======feature img======*/}
-            <div className="relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
-                <img src={featureImg} className="w-3/4" alt="" />
-
-                <div className="w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0 md:bottom-[100px] md:left-5 z-20 p-2 pb-3 lg:px-4 lg:pb-[26px] rounded-[10px]">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-[6px] lg:gap-3">
-                            <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[600]">
-                                Tue, 24
-                            </p>
-                            <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[400]">
-                                10:00AM
-                            </p>
+            {/*======feature section======*/}
+            <section>
+                <div className="container">
+                    <div className="flex items-center justify-between flex-col lg:flex-row">
+                        <div className="xl:w-[670px]">
+                            <h2 className="heading">
+                                Get virtual guidance <br /> anytime.
+                            </h2>
+                            <ul className="pl-4">
+                                <li className="text__para text-justify">1. Drop an email to our technician directly.</li>
+                                <li className="text__para text-justify">2. Search for your technician here, and contact them directly.</li>
+                                <li className="text__para text-justify">3. Schedule the appointment directly, use the online scheduling tool to select an appointment time.</li>
+                            </ul>
+                            <Link to="/">
+                                <button className="btn">Learn More</button>
+                            </Link>
                         </div>
-                        <span className="w-5 h-5 lg:w-[34px] lg:h-[34px] flex items-center justify-center bg-yellowColor rounded py-1 px-[6px] lg:py-3 lg:px-[9px]">
-                            <img src={videoIcon} alt="" />
-                        </span>
-                    </div>
-
-                    <div className="w-[65px] lg:w-[141px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 lg:mt-4 rounded-full">
-                        Remote Consultation
-                    </div>
-
-                    <div className="flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[18px]">
-                        <img src={avatarIcon} alt="" />
-                        <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">
-                            Bhuvnesh M.
-                        </h4>
+                        <div className="relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
+                            <img src={featureImg} className="w-3/4" alt="" />
+                            <div className="w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0 md:bottom-[100px] md:left-5 z-20 p-2 pb-3 lg:px-4 lg:pb-[26px] rounded-[10px]">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-[6px] lg:gap-3">
+                                        <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[600]">
+                                            Tue, 24
+                                        </p>
+                                        <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[400]">
+                                            10:00AM
+                                        </p>
+                                    </div>
+                                    <span className="w-5 h-5 lg:w-[34px] lg:h-[34px] flex items-center justify-center bg-yellowColor rounded py-1 px-[6px] lg:py-3 lg:px-[9px]">
+                                        <img src={videoIcon} alt="" />
+                                    </span>
+                                </div>
+                                <div className="w-[65px] lg:w-[141px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 lg:mt-4 rounded-full">
+                                    Remote Consultation
+                                </div>
+                                <div className="flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[18px]">
+                                    <img src={avatarIcon} alt="" />
+                                    <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">
+                                        Bhuvnesh M.
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-{/*======feature section end======*/}
+            </section>
+            {/*======feature section end======*/}
 
             {/*======faq section======*/}
             <section>
@@ -242,22 +186,16 @@ const Home = () => {
                         <div className="w-1/2 hidden md:block">
                             <img src={faqImg} alt="" />
                         </div>
-
                         <div className="w-full md:w-1/2">
-                            <h2 className="heading">
-                                Frequently Asked Questions (FAQ)
-                            </h2>
-
+                            <h2 className="heading">Frequently Asked Questions (FAQ)</h2>
                             <FaqList />
                         </div>
-
                     </div>
                 </div>
             </section>
             {/*======faq section end======*/}
-           
         </>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

@@ -14,9 +14,6 @@ import avatarIcon from "../Assets/images/avatar-icon.png"
 import { Link } from "react-router-dom"
 import { BsArrowRight } from "react-icons/bs"
 import About from '../components/About/About'
-import ServiceList from '../components/Services/ServiceList'
-import TechnicianList from '../components/Technicians/TechnicianList'
-import Review from '../components/Review/Review'
 
 const Home = () => {
     const navigate = useNavigate();

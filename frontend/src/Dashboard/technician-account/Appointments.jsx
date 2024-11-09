@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { formateDate } from "../../utils/formateDate";
+import { formatDate } from "../../utils/formatDate";
 import { FaUser } from 'react-icons/fa'; // Import user icon
 
 const Appointments = ({ appointments }) => {
@@ -185,7 +185,7 @@ const Appointments = ({ appointments }) => {
                 )}
               </td>
               <td className="px-6 py-4 text-center">{item.ticketPrice}</td>
-              <td className="px-6 py-4 text-center">{formateDate(item.createdAt)}</td>
+              <td className="px-6 py-4 text-center">{formatDate(item.createdAt)}</td>
             </tr>
           ))}
         </tbody>

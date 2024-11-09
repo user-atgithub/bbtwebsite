@@ -1,4 +1,4 @@
-import { formateDate } from "../../utils/formateDate";
+import { formatDate } from "../../utils/formatDate";
 
 const TechnicianAbout = ({ name, about, qualifications, experiences }) => {
   return (
@@ -28,7 +28,7 @@ const TechnicianAbout = ({ name, about, qualifications, experiences }) => {
             >
               <div>
                 <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
-                  {formateDate(item.startingDate)} - {formateDate(item.endingDate)}
+                  {formatDate(item.startingDate)} - {formatDate(item.endingDate)}
                 </span>
                 <p className="text-[16px] leading-5 font-medium text-textColor">
                   {item.degree}
@@ -53,7 +53,7 @@ const TechnicianAbout = ({ name, about, qualifications, experiences }) => {
               className="p-4 rounded bg-[#fff9ea]"
             >
               <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-                {formateDate(item.startingDate)} - {formateDate(item.endingDate)}
+                {formatDate(item.startingDate)} - {formatDate(item.endingDate)}
               </span>
               <p className="text-[16px] leading-6 font-medium text-textColor">
                 {item.position}

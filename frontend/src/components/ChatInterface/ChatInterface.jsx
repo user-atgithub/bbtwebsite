@@ -9,10 +9,16 @@ const ChatInterface = () => {
         name: '',
         email: '',
         subject: '',
-        message: ''
+        message: ''  // Make sure message is part of formData
     });
     const [messageStatus, setMessageStatus] = useState('');
     const [inputValue, setInputValue] = useState('');
+
+    // Toggle chat open/close and reset message status when opening
+    const toggleChat = () => {
+        setIsOpen(!isOpen);
+        if (!isOpen) setMessageStatus('');  // Clear success message on reopening
+    };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -20,6 +26,9 @@ const ChatInterface = () => {
 
     const handleNext = () => {
         if (inputValue.trim() === '') return;
+
+        // Clear message status if user starts a new interaction after sending
+        if (messageStatus) setMessageStatus('');
 
         const currentStep = contactQuestions[step];
         setFormData({
@@ -30,7 +39,7 @@ const ChatInterface = () => {
         setInputValue('');
 
         if (step === contactQuestions.length - 1) {
-            handleSubmit();
+            handleSubmit();  // Final submission if it's the last step
         } else {
             setStep(step + 1);
         }
@@ -45,12 +54,20 @@ const ChatInterface = () => {
     };
 
     const handleSubmit = () => {
-        emailjs.send('service_ofq7keb', 'template_kplgzjk', formData, '-DOGhLMLwNhbIz-Ca')
+        // Ensure the final input is saved to the message field
+        const updatedFormData = { 
+            ...formData,
+            message: formData.message || inputValue  // If message is empty, set it to inputValue
+        };
+
+        console.log("Form data being sent:", updatedFormData); // Check the data before sending
+
+        emailjs.send('service_ofq7keb', 'template_kplgzjk', updatedFormData, '-DOGhLMLwNhbIz-Ca')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
                 setMessageStatus('Message sent successfully!');
-                setStep(0); // Reset chat
-                setFormData({
+                setStep(0);  // Reset steps for new interaction
+                setFormData({  // Clear form data
                     name: '',
                     email: '',
                     subject: '',
@@ -65,7 +82,7 @@ const ChatInterface = () => {
     return (
         <>
             <button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={toggleChat}
                 style={{
                     position: 'fixed',
                     bottom: '20px',
@@ -82,7 +99,7 @@ const ChatInterface = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '24px',
-                    zIndex: 1000 // Ensure the button is on top
+                    zIndex: 1000
                 }}
             >
                 💬
@@ -100,10 +117,10 @@ const ChatInterface = () => {
                     padding: '10px',
                     maxHeight: '400px',
                     overflowY: 'auto',
-                    zIndex: 1000 // Ensure the chat box is on top
+                    zIndex: 1000
                 }}>
                     <button
-                        onClick={() => setIsOpen(false)}
+                        onClick={toggleChat}
                         style={{
                             position: 'absolute',
                             top: '10px',
@@ -162,7 +179,11 @@ const ChatInterface = () => {
                             </button>
                         </div>
                     </div>
-                    {messageStatus && <p>{messageStatus}</p>}
+                    {messageStatus && (
+                        <p style={{ color: 'green', marginTop: '10px' }}>
+                            {messageStatus}
+                        </p>
+                    )}
                 </div>
             )}
         </>

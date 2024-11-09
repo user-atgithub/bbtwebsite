@@ -1,4 +1,28 @@
 const reviews = [
+  {
+    name: "Tony",
+    rating: 5.0,
+    text: "Bhuvnesh was great!! Very knowledgeable. Always stayed in contact with me. Explained what he was going to do. No hidden fees or extras. Product was exactly what he said it was. Clean and professional install as if it was factory done. Took the time to go over and explain the features. Thank you!! \n Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-11-03"
+  },
+  {
+    name: "Brian",
+    rating: 5.0,
+    text: "He was extremely helpful and professional. I would work with him again! \n Notable: • Communication",
+    date: "2024-10-31"
+  },
+  {
+    name: "Yasir",
+    rating: 5.0,
+    text: "Amazing customer service from Bhuvnesh!!",
+    date: "2024-10-30"
+  },
+  {
+    name: "Dom",
+    rating: 1.0,
+    text: "The listing said custom headlights and tailights but what he had to offer is just stock ones plus they were way overpriced I could buy the same thing or even actual custom ones for half the price online",
+    date: "2024-10-18"
+  },
     {
       name: "Atwal",
       rating: 5.0,
@@ -8,7 +32,7 @@ const reviews = [
     {
       name: "Nikhil",
       rating: 5.0,
-      text: "Notable: Punctuality • Communication",
+      text: "Notable: • Punctuality • Communication",
       date: "2024-10-12"
     },
     {
@@ -164,7 +188,7 @@ const reviews = [
     {
       name: "Brandon",
       rating: 5.0,
-      text: "Notable: Punctuality · Communication · Pricing · Item description",
+      text: "Was able to meet in a public area, helped to guide me as I'm from out of town and was very accommodating \n Notable: Punctuality · Communication · Pricing · Item description",
       date: "2024-04-18"
     },
     {
@@ -248,7 +272,7 @@ const reviews = [
     {
       name: "Ayush",
       rating: 5.0,
-      text: "Very helpful and great communication !!\n Notable: Punctuality · Communication · Pricing · Item description",
+      text: "Very helpful and great communication !! \n Notable: Punctuality · Communication · Pricing · Item description",
       date: "2024-02-03"
     },
     {
@@ -260,7 +284,7 @@ const reviews = [
     {
       name: "Naomi",
       rating: 5.0,
-      text: "I recommend this seller!\n Notable: Punctuality · Communication · Pricing · Item description",
+      text: "I recommend this seller! \n Notable: Punctuality · Communication · Pricing · Item description",
       date: "2024-02-02"
     },
     {
@@ -286,6 +310,293 @@ const reviews = [
       rating: 5.0,
       text: "Notable: Punctuality · Communication · Pricing",
       date: "2023-12-04"
+    },
+    {
+      name: "Nicole",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Pricing ·Item description",
+      date: "2023-11-24"
+    },
+    {
+      name: "Travis",
+      rating: 5.0,
+      text: "Notable: · Communication · Pricing ·Item description",
+      date: "2023-10-14"
+    },
+    {
+      name: "Alec",
+      rating: 5.0,
+      text: "Excellent customer service \n Notable: Punctuality · Communication · Pricing ·Item description",
+      date: "2023-10-09"
+    },
+    {
+      name: "Connor",
+      rating: 5.0,
+      text: "Notable: · Communication",
+      date: "2023-10-03"
+    },
+    {
+      name: "Shawn",
+      rating: 5.0,
+      text: "Notable: Punctuality · Communication · Pricing ·Item description",
+      date: "2023-10-02"
+    },
+    {
+      name: "Jason",
+      rating: 5.0,
+      text: "",
+      date: "2023-09-26"
+    },
+    {
+      name: "Jeremy",
+      rating: 5.0,
+      text: "Notable: · Pricing",
+      date: "2023-09-06"
+    },
+    {
+      name: "Mariusz",
+      rating: 5.0,
+      text: "Notable: · Communication · Punctuality · Item description · Pricing",
+      date: "2023-09-01"
+    },
+    {
+      name: "Adam",
+      rating: 5.0,
+      text: "Super knowledge, friendly answers all my dumb questions tonnes of patience, quick tidy install works perfectly better than expected. One of the best installers I have ever had work on my electronics!! \n Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-09-01"
+    },
+    {
+      name: "Alessandro",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-08-31"
+    },
+    {
+      name: "Anmol",
+      rating: 5.0,
+      text: "Notable: Communication · Punctuality · Item description · Pricing",
+      date: "2023-08-27"
+    },
+    {
+      name: "Bharath",
+      rating: 1.0,
+      text: "Instead of respond to customer queries, he just judge others by their questions and use abusive words.",
+      date: "2023-08-27"
+    },
+    {
+      name: "Navraj",
+      rating: 1.0,
+      text: "",
+      date: "2023-08-26"
+    },
+    {
+      name: "Kane",
+      rating: 5.0,
+      text: "Notable: · Communication",
+      date: "2023-08-14"
+    },
+    {
+      name: "Nawapon",
+      rating: 5.0,
+      text: "Arrive on time honestly my first time doing the lights, and it turn out amazing!. Definitely will do more on my door for next time. Honestly worth the price, awesome service aswell! \n Notable: · Communication · Punctuality · Pricing",
+      date: "2023-08-13"
+    },
+    {
+      name: "Brian",
+      rating: 5.0,
+      text: "",
+      date: "2023-07-25"
+    },
+    {
+      name: "Damion",
+      rating: 5.0,
+      text: "",
+      date: "2023-06-30"
+    },
+    {
+      name: "Ange",
+      rating: 5.0,
+      text: "Notable: · Item description",
+      date: "2023-06-18"
+    },
+    {
+      name: "Gagan",
+      rating: 5.0,
+      text: "Notable: · Pricing",
+      date: "2023-06-16"
+    },
+    {
+      name: "Andrianne",
+      rating: 5.0,
+      text: "He was very nice, and knew what he was doing. First time getting something on Facebook market and he was able to help me out on fixing my screen in my car. \n I recommend him if you want the job done fast and efficiently. \n Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-06-03"
+    },    {
+      name: "Aman",
+      rating: 5.0,
+      text: "best service provided helped me find out what i actually needed thanks \n Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-05-29"
+    },
+    {
+      name: "Andrew",
+      rating: 5.0,
+      text: "On time, on budget and did what he said he would!",
+      date: "2023-05-22"
+    },
+    {
+      name: "Labinot",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-05-17"
+    },
+    {
+      name: "Amine",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-05-13"
+    },
+    {
+      name: "Michael",
+      rating: 5.0,
+      text: "",
+      date: "2023-04-25"
+    },
+    {
+      name: "Jamie",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-03-31"
+    },
+    {
+      name: "Fahmid",
+      rating: 5.0,
+      text: "Notable: · Punctuality",
+      date: "2023-02-22"
+    },
+    {
+      name: "Quazi",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-02-05"
+    },
+    {
+      name: "Harman",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-01-29"
+    },
+    {
+      name: "Taylor",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2023-01-11"
+    },
+    {
+      name: "Karan",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication",
+      date: "2023-01-09"
+    },
+    {
+      name: "Gerry",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2022-11-10"
+    },
+    {
+      name: "Uday",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2022-09-22"
+    },
+    {
+      name: "Lili",
+      rating: 5.0,
+      text: "",
+      date: "2022-09-08"
+    },
+    {
+      name: "Gurjaap",
+      rating: 1.0,
+      text: "",
+      date: "2022-09-08"
+    },
+    {
+      name: "Jaspreet Kaur",
+      rating: 5.0,
+      text: "",
+      date: "2022-07-28"
+    },
+    {
+      name: "Finish",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2022-07-10"
+    },
+    {
+      name: "Abhishek",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2022-06-17"
+    },
+    {
+      name: "Satinder",
+      rating: 1.0,
+      text: "",
+      date: "2022-03-06"
+    },
+    {
+      name: "Lakhbir",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2022-01-02"
+    },
+    {
+      name: "Hazin",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2021-11-21"
+    },
+    {
+      name: "Vincet",
+      rating: 1.0,
+      text: "",
+      date: "2021-11-08"
+    },
+    {
+      name: "Yuri",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Item description",
+      date: "2021-10-03"
+    },
+    {
+      name: "Mohamed",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2021-05-28"
+    },
+    {
+      name: "Murtaza",
+      rating: 1.0,
+      text: "",
+      date: "2021-05-16"
+    },
+    {
+      name: "Nikos",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2021-05-01"
+    },
+    {
+      name: "Amit",
+      rating: 5.0,
+      text: "",
+      date: "2021-04-29"
+    },
+    {
+      name: "Arvind",
+      rating: 5.0,
+      text: "Notable: · Punctuality · Communication · Pricing · Item description",
+      date: "2021-04-10"
     },
   ];
   export default reviews;

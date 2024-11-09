@@ -21,17 +21,11 @@ const About = () => {
                     <div className="w-full lg:w-1/2 xl:w-[670px] order-1 lg:order-2">
                         <h2 className="heading"> Proud to be one of the nations best</h2>
                         <p className="text__para text-justify">
-                            for 15 years in a row.for 15 years in a row.
-                            for 15 years in a row. for 15 years in a row.
-                            for 15 years in a row. 
-                            for 15 years in a row.for 15 years in a row.
+                        For 15 years in a row, we've proudly held a spot as one of the nation’s top-rated providers. This recognition is a testament to our dedication, and we're grateful to our customers who have trusted us along the way.
                         </p>
 
-                        <p className="text__para mt-[30px]">
-                            Our best is something we strive for each day, 
-                            caring for our cutomers-not looking back at 
-                            what we accomplished 
-                            but towards what we can do tomorrow.
+                        <p className="text__para text-justify mt-[30px]">
+                           Each day, we strive to raise the bar, focusing on the future and how we can continue to improve. Our commitment to exceptional service means we’re always looking ahead, finding new ways to care for and support you better.
                         </p>
                         <Link to='/'>
                             <button className="btn">Learn More</button>

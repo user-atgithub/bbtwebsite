@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import StarRatings from 'react-star-ratings';
 import customerAvatar from '../../Assets/images/customer-avatar.png';
 import reviews from '../../Assets/data/reviews';
@@ -12,6 +12,7 @@ const Review = () => {
   const [reviewsPerPage, setReviewsPerPage] = useState(21);
   const [filterRating, setFilterRating] = useState(0);
   const [sortOrder, setSortOrder] = useState('');
+  const [count, setCount] = useState(0); // Animated count for reviews
 
   const handleToggleExpand = (index) => {
     setExpandedIndex(prevIndex => (prevIndex === index ? null : index));
@@ -44,6 +45,23 @@ const Review = () => {
   const currentReviews = filteredReviews.slice(indexOfFirstReview, indexOfLastReview);
 
   const totalPages = Math.ceil(filteredReviews.length / reviewsPerPage);
+  
+  // Animated total review count logic
+  useEffect(() => {
+    const totalReviews = filteredReviews.length;
+    if (count < totalReviews) {
+      const interval = setInterval(() => {
+        setCount(prevCount => {
+          if (prevCount < totalReviews) {
+            return prevCount + 1;
+          } else {
+            clearInterval(interval);
+            return totalReviews;
+          }
+        });
+      }, 100); // adjust the speed of increment
+    }
+  }, [filteredReviews.length, count]);
 
   return (
     <div className="mt-[30px] lg:mt-[55px]">
@@ -55,6 +73,13 @@ const Review = () => {
             World-class care for everyone. Our services offer unmatched expert auto mods.
           </p>
         </div>
+      </div>
+
+      {/* Display animated total number of reviews */}
+      <div className="container text-center mb-4">
+        <p className="text-lg font-semibold">
+          {count} {count === 1 ? 'Review' : 'Reviews'}
+        </p>
       </div>
 
       {/* Controls for pagination, filter, and sorting */}
@@ -91,7 +116,11 @@ const Review = () => {
       {/* Reviews display */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentReviews.map((review, index) => (
-          <div key={index} className="review-card border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg hover:scale-105 transform">
+          <div
+            key={index}
+            className="review-card border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg hover:scale-105 transform"
+            onClick={() => handleToggleExpand(index)} // Make review tile clickable
+          >
             <div className="flex items-center gap-3">
               <img src={customerAvatar} alt="" className="w-12 h-12 rounded-full" />
               <div>
@@ -129,7 +158,10 @@ const Review = () => {
               {review.text.length > MAX_LENGTH && (
                 <button 
                   className="text-blue-500 cursor-pointer ml-2"
-                  onClick={() => handleToggleExpand(index)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent click event from propagating to parent div
+                    handleToggleExpand(index);
+                  }}
                 >
                   {expandedIndex === index ? " - " : " + "}
                 </button>

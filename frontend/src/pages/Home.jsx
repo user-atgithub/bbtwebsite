@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroVideo from "../Assets/videos/hero-video.mp4";
 import icon01 from "../Assets/images/icon01.png";
@@ -15,6 +15,60 @@ import About from '../components/About/About';
 
 const Home = () => {
     const navigate = useNavigate();
+    const [typedText, setTypedText] = useState('');
+    const [stage, setStage] = useState(1); // 1 for typing, 2 for backspacing, 3 for final typing
+    const [videoEnded, setVideoEnded] = useState(false); // New state to check if video ended
+    const [showButton, setShowButton] = useState(false); // State to trigger the slide-up animation
+    const textToType = "Because they are not cars,";
+    const finalText = "Because they are not just cars, they are emotions.";
+
+    // This useEffect runs when the video ends
+    const handleVideoEnd = () => {
+        setVideoEnded(true); // Set videoEnded to true when video ends
+    };
+
+    useEffect(() => {
+        // Only start typing effect if the video has ended
+        if (!videoEnded) return;
+
+        let typingDelay = 100;
+        let backspacingDelay = 50;
+
+        const typeEffect = () => {
+            switch (stage) {
+                case 1: // Typing initial text
+                    if (typedText.length < textToType.length) {
+                        setTypedText(textToType.slice(0, typedText.length + 1));
+                    } else {
+                        setTimeout(() => setStage(2), 500); // Pause before backspacing
+                    }
+                    break;
+                case 2: // Backspacing "cars" letter by letter
+                    if (typedText.endsWith("cars,")) {
+                        setTypedText(typedText.slice(0, -1)); // Remove one character at a time
+                    } else if (typedText.endsWith("not ")) {
+                        setStage(3); // Move to the final typing stage
+                    } else {
+                        setTypedText(typedText.slice(0, -1));
+                    }
+                    break;
+                case 3: // Typing final text
+                    if (typedText.length < finalText.length) {
+                        setTypedText(finalText.slice(0, typedText.length + 1));
+                    } else {
+                        setTimeout(() => setShowButton(true), 500); // Show button after typing effect ends
+                    }
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        const delay = stage === 2 ? backspacingDelay : typingDelay;
+        const timer = setTimeout(typeEffect, delay);
+
+        return () => clearTimeout(timer);
+    }, [typedText, stage, videoEnded]);
 
     const handleClick = () => {
         navigate('/technicians');
@@ -22,73 +76,76 @@ const Home = () => {
 
     return (
         <>
-            {/*======hero section======*/}
-            <section className="hero__section pt-[60px] 2xl:h-[800px]">
+            {/*======hero section with video======*/}
+            <section className="hero__section pt-[200px] relative overflow-hidden h-screen">
                 {/* Background video */}
                 <video
-    autoPlay
-    muted
-    playsInline
-    className="w-full h-full object-cover"
-    onEnded={(e) => {
-        e.target.currentTime = e.target.duration; // Force video to stay at the last frame
-        e.target.pause(); // Ensure the video is paused
-    }}
->
-    <source src={heroVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-</video>
+                    autoPlay
+                    muted
+                    playsInline
+                    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+                    onEnded={handleVideoEnd} // Trigger typing effect when video ends
+                >
+                    <source src={heroVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
 
-
-                <div className="container relative z-10">
-                    <div className="flex flex-col lg:flex-row gap-[90px] items-center justify-between">
+                {/* Full-width container */}
+                <div className="relative z-10 px-8">
+                    <div className="flex flex-col items-center text-center gap-[30px]">
                         {/*======hero content======*/}
                         <div>
-                            <div className="lg:w-[570px]">
-                                <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px] text-justify">
-                                    Because they are not just cars, they are emotions.
-                                </h1>
-                                <p className="text__para text-justify">
-                                    We specialize in a range of installations to upgrade your car's style and functionality, including
-                                    subwoofer, ambient lights, dash cameras, car spoilers, radios, and speakers. Our team of experts
-                                    creates custom solutions that fit your unique style and preferences, using top-of-the-line equipment
-                                    and skills to ensure hassle-free installations that perfectly reflect your personality. Whether you want to enhance your listening experience, add a sporty touch, or protect yourself on the road, we've got you covered.
-                                </p>
+                            <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px] text-center max-w-[950px] mx-auto sm:text-[28px] sm:leading-[38px]">
+                                <span>{typedText}</span>
+                            </h1>
+                            <p className="text__para text-center max-w-3xl mx-auto mt-4">
+                            </p>
 
-                                <button className='btn' onClick={handleClick}>Request an Appointment</button>
-                            </div>
-
-                            {/*======hero stats======*/}
-                            <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
-                                <div>
-                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-                                        {new Date().getFullYear() - 2012}+
-                                    </h2>
-                                    <span className="w-[100px] h-2 bg-yellowColor rounded-full block mt-[-14px]"></span>
-                                    <p className="text__para">Years of Experience</p>
-                                </div>
-
-                                <div>
-                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-                                        02+
-                                    </h2>
-                                    <span className="w-[100px] h-2 bg-purpleColor rounded-full block mt-[-14px]"></span>
-                                    <p className="text__para">Garage Locations</p>
-                                </div>
-
-                                <div>
-                                    <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
-                                        100%
-                                    </h2>
-                                    <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px]"></span>
-                                    <p className="text__para">Customer Satisfaction</p>
-                                </div>
-                            </div>
+                            {/* Apply slide-up animation class based on `showButton` state */}
+                            {showButton && (
+                                <button
+                                    className="btn mt-6 slide-up" 
+                                    onClick={handleClick}>
+                                    Request an Appointment
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
             </section>
             {/*======hero section end======*/}
+
+            {/*======hero stats section======*/}
+            <section className="hero__stats mt-[50px]">
+                <div className="container">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-center">
+                        <div>
+                            <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+                                {new Date().getFullYear() - 2012}+ 
+                            </h2>
+                            <span className="w-[100px] h-2 bg-yellowColor rounded-full block mt-[-14px] mx-auto"></span>
+                            <p className="text__para">Years of Experience</p>
+                        </div>
+
+                        <div>
+                            <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+                                02+
+                            </h2>
+                            <span className="w-[100px] h-2 bg-purpleColor rounded-full block mt-[-14px] mx-auto"></span>
+                            <p className="text__para">Garage Locations</p>
+                        </div>
+
+                        <div>
+                            <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
+                                100%
+                            </h2>
+                            <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px] mx-auto"></span>
+                            <p className="text__para">Customer Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/*======hero stats section end======*/}
 
             <section>
                 <div className="container">
@@ -149,51 +206,35 @@ const Home = () => {
                         </div>
                         <div className="relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
                             <img src={featureImg} className="w-3/4" alt="" />
-                            <div className="w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0 md:bottom-[100px] md:left-5 z-20 p-2 pb-3 lg:px-4 lg:pb-[26px] rounded-[10px]">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-[6px] lg:gap-3">
-                                        <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[600]">
-                                            Tue, 24
-                                        </p>
-                                        <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[400]">
-                                            10:00AM
-                                        </p>
-                                    </div>
-                                    <span className="w-5 h-5 lg:w-[34px] lg:h-[34px] flex items-center justify-center bg-yellowColor rounded py-1 px-[6px] lg:py-3 lg:px-[9px]">
-                                        <img src={videoIcon} alt="" />
-                                    </span>
-                                </div>
-                                <div className="w-[65px] lg:w-[141px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 lg:mt-4 rounded-full">
-                                    Remote Consultation
-                                </div>
-                                <div className="flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[18px]">
-                                    <img src={avatarIcon} alt="" />
-                                    <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">
-                                        Bhuvnesh M.
-                                    </h4>
-                                </div>
+                            <div className="absolute top-[120px] left-[15%]">
+                                <img src={videoIcon} alt="" />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            {/*======feature section end======*/}
 
             {/*======faq section======*/}
             <section>
                 <div className="container">
-                    <div className="flex justify-between gap-[50px] lg:gap-0">
-                        <div className="w-1/2 hidden md:block">
-                            <img src={faqImg} alt="" />
-                        </div>
-                        <div className="w-full md:w-1/2">
-                            <h2 className="heading">Frequently Asked Questions (FAQ)</h2>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[60px] items-center">
+                        <div>
+                            <h2 className="heading">Frequently asked questions</h2>
+                            <p className="text__para">
+                                We have compiled the most frequently asked questions and answered them in detail.
+                            </p>
+
                             <FaqList />
+                        </div>
+                        <div className="relative mt-[40px] sm:mt-0">
+                            <img src={faqImg} alt="" />
+                            <div className="absolute top-[20%] left-[30%] sm:left-[15%]">
+                                <img src={avatarIcon} className="w-[250px] sm:w-[300px]" alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            {/*======faq section end======*/}
         </>
     );
 };

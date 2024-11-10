@@ -151,3 +151,19 @@ body {
       border-image-source: linear-gradient(225deg, rgba(255, 0, 255, 0.6), rgba(255, 255, 0, 0.6), rgba(0, 255, 255, 0.6));
   }
 }
+/* Home page request an appointment button slide up animation */
+@keyframes slideUp {
+  0% {
+      transform: translateY(30px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+  opacity: 0; /* Initially invisible */
+}

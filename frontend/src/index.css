@@ -33,10 +33,10 @@
     .text__para {
         @apply text-[18px] leading-[30px] font-[400] text-textColor mt-[18px];
     }
-
     .header {
-        @apply bg-[url('./Assets/images/mask.png')] bg-no-repeat bg-center bg-cover w-full h-[100px] leading-[100px];
+        @apply bg-white w-full h-[100px] leading-[100px] border-b-2 border-black;
     }
+    
 
     .hero__section {
         position: relative;

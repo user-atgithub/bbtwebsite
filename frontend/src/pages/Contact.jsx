@@ -2,27 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import emailjs from "emailjs-com";
 import ReCAPTCHA from "react-google-recaptcha";
 import { contactQuestions } from "../Assets/data/contactQuestions.js";
-import { GoogleMap, LoadScript, Polygon } from "@react-google-maps/api";
-
-const vancouverCoordinates = { lat: 49.2827, lng: -123.1207 };
-
-const vancouverPolygonCoords = [
-  { lat: 49.288, lng: -123.024 },
-  { lat: 49.264, lng: -123.041 },
-  { lat: 49.246, lng: -123.108 },
-  { lat: 49.282, lng: -123.203 },
-  { lat: 49.317, lng: -123.149 },
-  { lat: 49.295, lng: -123.068 },
-];
-
-const surreyPolygonCoords = [
-  { lat: 49.196, lng: -122.911 },
-  { lat: 49.153, lng: -122.893 },
-  { lat: 49.097, lng: -122.781 },
-  { lat: 49.116, lng: -122.637 },
-  { lat: 49.171, lng: -122.733 },
-  { lat: 49.217, lng: -122.825 },
-];
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -39,13 +18,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const formRef = useRef(null);
-  const [mapHeight, setMapHeight] = useState("400px");
-
-  useEffect(() => {
-    if (formRef.current) {
-      setMapHeight(`${formRef.current.offsetHeight}px`);
-    }
-  }, []);
+  const mapRef = useRef(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -116,6 +89,13 @@ const Contact = () => {
       .finally(() => setLoading(false));
   };
 
+  useEffect(() => {
+    if (formRef.current && mapRef.current) {
+      const formHeight = formRef.current.offsetHeight;
+      mapRef.current.style.height = `${formHeight}px`; // Adjust map height to match form height
+    }
+  }, [formData]); // Recalculate if form data changes
+
   return (
     <div className="mt-[30px] lg:mt-[55px]">
       <div className="container">
@@ -130,19 +110,19 @@ const Contact = () => {
       <style>{`
         .contact-container {
           display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: flex-start;
+          flex-direction: column; /* Start with column layout */
+          justify-content: space-between;
           gap: 20px;
           flex-wrap: wrap;
         }
 
         .map-container,
         .form-container {
-          flex: 1 1 100%; /* Default to full width */
+          flex: 1 1 100%; /* Take full width initially */
+          display: flex;
+          flex-direction: column;
         }
 
-        /* Make sure form fields are responsive */
         .form-container {
           width: 100%;
           max-width: 100%;
@@ -152,7 +132,7 @@ const Contact = () => {
         .form-container input {
           width: 100%;
           padding: 8px;
-          box-sizing: border-box; /* Ensures padding is within width */
+          box-sizing: border-box;
         }
 
         .form-container label,
@@ -161,30 +141,6 @@ const Contact = () => {
           font-size: 16px;
         }
 
-        /* Responsive styling */
-        @media (min-width: 768px) {
-          .contact-container {
-            flex-direction: row;
-          }
-          .map-container,
-          .form-container {
-            flex: 1 1 45%; /* Equal width on larger screens */
-          }
-        }
-
-        /* Responsive font size for mobile */
-        @media (max-width: 767px) {
-          .form-container label,
-          .form-container input,
-          .form-container p {
-            font-size: 14px;
-          }
-          .form-container input {
-            padding: 6px;
-          }
-        }
-
-        /* Styling for the button */
         .submit-button {
           padding: 10px 20px;
           background-color: #007bff;
@@ -194,52 +150,64 @@ const Contact = () => {
           cursor: pointer;
           opacity: ${loading ? 0.6 : 1};
           pointer-events: ${loading ? "none" : "auto"};
+          width: 100%; /* Make the button take full width */
+          box-sizing: border-box;
+        }
+
+        /* Mobile-first layout */
+        @media (min-width: 768px) {
+          .contact-container {
+            flex-direction: row; /* Row layout for larger screens */
+            gap: 20px;
+          }
+          .map-container,
+          .form-container {
+            flex: 1 1 45%; /* Equal width for form and map */
+          }
+        }
+
+        @media (max-width: 767px) {
+          .form-container label,
+          .form-container input,
+          .form-container p {
+            font-size: 14px;
+          }
+          .form-container input {
+            padding: 6px;
+          }
+
+          .submit-button {
+            padding: 12px 20px; /* Adjust padding for mobile */
+          }
+
+          .recaptcha-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+          }
+
+          .submit-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+          }
+
         }
       `}</style>
 
       <section style={{ padding: "20px" }}>
         <div className="contact-container">
-          {/* Column 1: Map */}
-          <div
-            className="map-container"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: mapHeight,
-            }}
-          >
-            <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-              <GoogleMap
-                mapContainerStyle={{ width: "100%", height: "100%" }}
-                center={vancouverCoordinates}
-                zoom={10}
-              >
-                <Polygon
-                  paths={vancouverPolygonCoords}
-                  options={{
-                    fillColor: "green",
-                    fillOpacity: 0.4,
-                    strokeColor: "green",
-                    strokeOpacity: 1,
-                    strokeWeight: 2,
-                  }}
-                />
-                <Polygon
-                  paths={surreyPolygonCoords}
-                  options={{
-                    fillColor: "green",
-                    fillOpacity: 0.4,
-                    strokeColor: "green",
-                    strokeOpacity: 1,
-                    strokeWeight: 2,
-                  }}
-                />
-              </GoogleMap>
-            </LoadScript>
+          <div ref={mapRef} className="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d166656.29321325506!2d-123.41923361954586!3d49.25735907613923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673f143a94fb3%3A0xbb9196ea9b81f38b!2sVancouver%2C%20BC!5e0!3m2!1sen!2sca!4v1731195199887!5m2!1sen!2sca"
+              width="100%"
+              height="100%"
+              style={{ border: "0", width: "100%", height: "100%" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
-
-          {/* Column 2: Contact Form */}
           <div ref={formRef} className="form-container">
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {contactQuestions.map((q, index) => (
@@ -267,11 +235,13 @@ const Contact = () => {
                   )}
                 </div>
               ))}
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div className="recaptcha-container">
                 <ReCAPTCHA
                   sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                   onChange={handleRecaptcha}
                 />
+              </div>
+              <div className="submit-container">
                 <button
                   type="submit"
                   className="submit-button"

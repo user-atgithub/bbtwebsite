@@ -160,83 +160,163 @@ const Home = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]">
-                        {/* Service Cards */}
-                        {[{icon: icon01, title: 'Find a Technician', link: '/technicians'},
-                          {icon: icon02, title: 'Find a Location', link: '/contact'},
-                          {icon: icon03, title: 'Book Appointment', link: '/technicians'}]
-                        .map(({icon, title, link}, index) => (
-                            <div className="py-[30px] px-5" key={index}>
-                                <div className="flex items-center justify-center">
-                                    <img src={icon} alt="" />
-                                </div>
-                                <div className="mt-[30px]">
-                                    <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">{title}</h2>
-                                    <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                                        World-class service for everyone. We offer unmatched, professional car modifications.
-                                    </p>
-                                    <Link to={link}
-                                        className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none">
-                                        <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                                    </Link>
-                                </div>
+                        <div className="py-[30px] px-5 ">
+                            <div className="flex items-center justify-center">
+                                <img src={icon01} alt="" />
                             </div>
-                        ))}
+
+                            <div className="mt-[30px]">
+                                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
+                                    Find a Technician
+                                </h2>
+                                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                                    World-class service for everyone. We offer unmatched,
+                                    professional car modifications.
+                                </p>
+
+                                <Link
+                                    to="/technicians"
+                                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+                                >
+                                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="py-[30px] px-5 ">
+                            <div className="flex items-center justify-center">
+                                <img src={icon02} alt="" />
+                            </div>
+
+                            <div className="mt-[30px]">
+                                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
+                                    Find a Location
+                                </h2>
+                                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                                    World-class service for everyone. We offer unmatched,
+                                    professional car modifications.
+                                </p>
+
+                                <Link
+                                    to="/contact"
+                                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+                                >
+                                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                                </Link>
+                            </div>
+                        </div><div className="py-[30px] px-5 ">
+                            <div className="flex items-center justify-center">
+                                <img src={icon03} alt="" />
+                            </div>
+
+                            <div className="mt-[30px]">
+                                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
+                                    Book Appointment
+                                </h2>
+                                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                                    World-class service for everyone. We offer unmatched,
+                                    professional car modifications.
+                                </p>
+
+                                <Link
+                                    to="/technicians"
+                                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+                                >
+                                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                                </Link>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
 
             <About />
 
-            {/*======feature section======*/}
-            <section>
-                <div className="container">
-                    <div className="flex items-center justify-between flex-col lg:flex-row">
-                        <div className="xl:w-[670px]">
-                            <h2 className="heading">
-                                Get virtual guidance <br /> anytime.
-                            </h2>
-                            <ul className="pl-4">
-                                <li className="text__para text-justify">1. Drop an email to our technician directly.</li>
-                                <li className="text__para text-justify">2. Search for your technician here, and contact them directly.</li>
-                                <li className="text__para text-justify">3. Schedule the appointment directly, use the online scheduling tool to select an appointment time.</li>
-                            </ul>
-                            <Link to="/">
-                                <button className="btn">Learn More</button>
-                            </Link>
+ {/*======feature section======*/}
+<section>
+    <div className="container">
+        <div className="flex items-center justify-between flex-col lg:flex-row">
+            {/*======feature content======*/}
+            <div className="xl:w-[670px]">
+                <h2 className="heading">
+                    Get virtual guidance <br /> anytime.
+                </h2>
+                <ul className="pl-4">
+                    <li className="text__para text-justify">
+                        1. Drop an email to our technician directly.
+                    </li>
+                    <li className="text__para text-justify">
+                        2. Search for your technician here, and contact them directly.
+                    </li>
+                    <li className="text__para text-justify">
+                        3. Schedule the appointment directly, use the online scheduling tool to select an appointment time.
+                    </li>
+                </ul>
+                <Link to="/">
+                    <button className="btn">Learn More</button>
+                </Link>
+            </div>
+
+            {/*======feature img======*/}
+            <div className="relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
+                <img src={featureImg} className="w-3/4" alt="" />
+
+                <div className="w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0 md:bottom-[100px] md:left-5 z-20 p-2 pb-3 lg:px-4 lg:pb-[26px] rounded-[10px]">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-[6px] lg:gap-3">
+                            <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[600]">
+                                Tue, 24
+                            </p>
+                            <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[400]">
+                                10:00AM
+                            </p>
                         </div>
-                        <div className="relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
-                            <img src={featureImg} className="w-3/4" alt="" />
-                            <div className="absolute top-[120px] left-[15%]">
-                                <img src={videoIcon} alt="" />
-                            </div>
-                        </div>
+                        <span className="w-5 h-5 lg:w-[34px] lg:h-[34px] flex items-center justify-center bg-yellowColor rounded py-1 px-[6px] lg:py-3 lg:px-[9px]">
+                            <img src={videoIcon} alt="" />
+                        </span>
+                    </div>
+
+                    <div className="w-[65px] lg:w-[141px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 lg:mt-4 rounded-full">
+                        Remote Consultation
+                    </div>
+
+                    <div className="flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[18px]">
+                        <img src={avatarIcon} alt="" />
+                        <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">
+                            Bhuvnesh M.
+                        </h4>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
+{/*======feature section end======*/}
 
             {/*======faq section======*/}
             <section>
                 <div className="container">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[60px] items-center">
-                        <div>
-                            <h2 className="heading">Frequently asked questions</h2>
-                            <p className="text__para">
-                                We have compiled the most frequently asked questions and answered them in detail.
-                            </p>
+                    <div className="flex justify-between gap-[50px] lg:gap-0">
+                        <div className="w-1/2 hidden md:block">
+                            <img src={faqImg} alt="" />
+                        </div>
+
+                        <div className="w-full md:w-1/2">
+                            <h2 className="heading">
+                                Frequently Asked Questions (FAQ)
+                            </h2>
 
                             <FaqList />
                         </div>
-                        <div className="relative mt-[40px] sm:mt-0">
-                            <img src={faqImg} alt="" />
-                            <div className="absolute top-[20%] left-[30%] sm:left-[15%]">
-                                <img src={avatarIcon} className="w-[250px] sm:w-[300px]" alt="" />
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </section>
+            {/*======faq section end======*/}
+           
         </>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

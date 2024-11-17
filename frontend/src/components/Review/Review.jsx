@@ -7,15 +7,15 @@ import '../../App.css'; // Import the CSS file for the keyframe animations
 const MAX_LENGTH = 100;
 
 const Review = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [expandedReviewIndex, setExpandedReviewIndex] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [reviewsPerPage, setReviewsPerPage] = useState(21);
   const [filterRating, setFilterRating] = useState(0);
   const [sortOrder, setSortOrder] = useState('');
   const [count, setCount] = useState(0); // Animated count for reviews
 
-  const handleToggleExpand = (index) => {
-    setExpandedIndex(prevIndex => (prevIndex === index ? null : index));
+  const handleToggleExpandReview = (index) => {
+    setExpandedReviewIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
   const handleChangeReviewsPerPage = (e) => {
@@ -88,7 +88,7 @@ const Review = () => {
           <label htmlFor="reviewsPerPage" className="mr-2">Show reviews per page:</label>
           <select id="reviewsPerPage" value={reviewsPerPage} onChange={handleChangeReviewsPerPage}>
             <option value={6}>6</option>
-            <option value={12}>12</option>
+            <option value={11}>11</option>
             <option value={21}>21</option>
           </select>
         </div>
@@ -115,11 +115,11 @@ const Review = () => {
 
       {/* Reviews display */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {currentReviews.map((review, index) => (
+        {currentReviews.map((review, reviewIndex) => (
           <div
-            key={index}
+            key={reviewIndex}
             className="review-card border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg hover:scale-105 transform"
-            onClick={() => handleToggleExpand(index)} // Make review tile clickable
+            onClick={() => handleToggleExpandReview(reviewIndex)} // Toggle both review and replies
           >
             <div className="flex items-center gap-3">
               <img src={customerAvatar} alt="" className="w-12 h-12 rounded-full" />
@@ -145,7 +145,7 @@ const Review = () => {
               />
             </div>
             <p className="text-[16px] leading-7 mt-4 text-textColor font-[400] text-justify">
-              {expandedIndex === index 
+              {expandedReviewIndex === reviewIndex
                 ? review.text.split('\n').map((line, i) => (
                     <span key={i}>{line}<br /></span>
                   )) 
@@ -160,42 +160,62 @@ const Review = () => {
                   className="text-blue-500 cursor-pointer ml-2"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent click event from propagating to parent div
-                    handleToggleExpand(index);
+                    handleToggleExpandReview(reviewIndex);
                   }}
                 >
-                  {expandedIndex === index ? " - " : " + "}
+                  {expandedReviewIndex === reviewIndex ? " - " : " + "}
                 </button>
               )}
             </p>
 
             {/* Display Replies */}
             <div className="mt-4">
-              {Array.isArray(review.replies) && review.replies.length > 0 && (
-                review.replies.map((reply, replyIndex) => (
-                  <div key={replyIndex} className="reply mt-2 pl-5 border-l-2">
-                    <p className="text-gray-600 text-sm">{reply.name} ({reply.date}):</p>
-                    <p className="text-textColor text-sm">{reply.text}</p>
-                  </div>
-                ))
-              )}
+              {review.replies && Array.isArray(review.replies) && review.replies.length > 0 && review.replies.map((reply, replyIndex) => (
+                <div key={replyIndex} className="reply mt-2 pl-5 border-l-2">
+                  <p className="text-gray-600 text-sm">{reply.name} ({reply.date}):</p>
+                  <p className="text-textColor text-sm">
+                    {expandedReviewIndex === reviewIndex // Expand replies only if the review is expanded
+                      ? reply.text.split('\n').map((line, i) => (
+                          <span key={i}>{line}<br /></span>
+                        ))
+                      : reply.text.length > MAX_LENGTH
+                      ? `${reply.text.substring(0, MAX_LENGTH)}...`
+                      : reply.text.split('\n').map((line, i) => (
+                          <span key={i}>{line}<br /></span>
+                        ))
+                    }
+                  </p>
+                  {reply.text.length > MAX_LENGTH && (
+                    <button 
+                      className="text-blue-500 cursor-pointer ml-2"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent click event from propagating to parent div
+                        handleToggleExpandReview(reviewIndex); // Sync with review expansion
+                      }}
+                    >
+                      {expandedReviewIndex === reviewIndex ? " - " : " + "}
+                    </button>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Pagination controls */}
-      <div className="flex justify-center mt-6">
-        <button 
-          className="px-4 py-2 mx-1 border rounded-md" 
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-8">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          onClick={() => setCurrentPage(prevPage => Math.max(prevPage - 1, 1))}
           disabled={currentPage === 1}
         >
-          Previous
+          Prev
         </button>
-        <span className="px-4 py-2 mx-1">{`Page ${currentPage} of ${totalPages}`}</span>
-        <button 
-          className="px-4 py-2 mx-1 border rounded-md" 
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+        <span className="px-4 py-2">{currentPage} of {totalPages}</span>
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          onClick={() => setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages))}
           disabled={currentPage === totalPages}
         >
           Next

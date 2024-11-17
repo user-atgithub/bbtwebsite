@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import emailjs from "emailjs-com";
 import ReCAPTCHA from "react-google-recaptcha";
 import { contactQuestions } from "../Assets/data/contactQuestions.js";
-import Loader from "../components/Loader/Loading.jsx";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +16,6 @@ const Contact = () => {
   const [messageStatus, setMessageStatus] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [mapLoading, setMapLoading] = useState(true); // State to track if map is loading
 
   const formRef = useRef(null);
   const mapRef = useRef(null);
@@ -97,10 +95,6 @@ const Contact = () => {
       mapRef.current.style.height = `${formHeight}px`; // Adjust map height to match form height
     }
   }, [formData]); // Recalculate if form data changes
-
-  const handleMapLoad = () => {
-    setMapLoading(false); // Set map loading to false when the map is loaded
-  };
 
   return (
     <div className="mt-[30px] lg:mt-[55px]">
@@ -204,20 +198,18 @@ const Contact = () => {
       <section style={{ padding: "20px" }}>
         <div className="contact-container">
           <div ref={mapRef} className="map-container">
-            {/* Show loader component if map is still loading */}
-            {mapLoading && <Loader />} {/* Your loader component */}
-            
-            {/* Google Map iframe */}
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1332678.9833692852!2d-124.38047181249898!3d49.27850731374271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5462ce9005f9dfa5%3A0xce9c6c979ef4fca6!2sMetro%20Vancouver%2C%20BC!5e0!3m2!1sen!2sca!4v1731829405455!5m2!1sen!2sca&zoom=12"
-              width="100%"
-              height="100%"
-              style={{ border: "0", width: "100%", height: "100%" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              onLoad={handleMapLoad} // Trigger when map is loaded
-            />
+          <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1332678.9833692852!2d-124.38047181249898!3d49.27850731374271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5462ce9005f9dfa5%3A0xce9c6c979ef4fca6!2sMetro%20Vancouver%2C%20BC!5e0!3m2!1sen!2sca!4v1731829405455!5m2!1sen!2sca&zoom=12"
+  width="100%"
+  height="100%"
+  style={{ border: "0", width: "100%", height: "100%" }}
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
+
+
+
           </div>
           <div ref={formRef} className="form-container">
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>

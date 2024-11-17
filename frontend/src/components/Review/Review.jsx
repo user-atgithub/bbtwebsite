@@ -85,10 +85,10 @@ const Review = () => {
       {/* Controls for pagination, filter, and sorting */}
       <div className="flex justify-between mb-4">
         <div>
-          <label htmlFor="reviewsPerPage" className="mr-2">Show reviews per page:</label>
+          <label htmlFor="reviewsPerPage" className="mr-2">Reviews per page:</label>
           <select id="reviewsPerPage" value={reviewsPerPage} onChange={handleChangeReviewsPerPage}>
             <option value={6}>6</option>
-            <option value={11}>11</option>
+            <option value={12}>12</option>
             <option value={21}>21</option>
           </select>
         </div>
@@ -121,17 +121,18 @@ const Review = () => {
             className="review-card border rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg hover:scale-105 transform"
             onClick={() => handleToggleExpandReview(reviewIndex)} // Toggle both review and replies
           >
-            <div className="flex items-center gap-3">
-              <img src={customerAvatar} alt="" className="w-12 h-12 rounded-full" />
-              <div>
-                <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  {review.name}
-                </h4>
-                <span className="text-[16px] leading-[30px] text-headingColor">
-                  {new Date(`${review.date}T00:00:00`).toLocaleDateString()}
-                </span>
-              </div>
-            </div>
+<div className="flex items-center gap-3">
+  <img src={customerAvatar} alt="" className="w-12 h-12 rounded-full" />
+  <div>
+    <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
+      {review.name}
+      <span className="ml-2 text-sm font-normal text-gray-500">({review.source})</span> {/* Added source */}
+    </h4>
+    <span className="text-[16px] leading-[30px] text-headingColor">
+      {new Date(`${review.date}T00:00:00`).toLocaleDateString()}
+    </span>
+  </div>
+</div>
             <div className="flex items-center mt-2">
               <StarRatings
                 rating={review.rating}

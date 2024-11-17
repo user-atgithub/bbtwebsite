@@ -45,7 +45,14 @@ const reviews = [
     name: "Dom",
     rating: 1.0,
     text: "The listing said custom headlights and tailights but what he had to offer is just stock ones plus they were way overpriced I could buy the same thing or even actual custom ones for half the price online",
-    date: "2024-10-18"
+    date: "2024-10-18",
+    replies: [
+      {
+        name: "Support Team",
+        text: "Customer was reached out by the support team but no response was given by the customer.",
+        date: "2024-10-19"
+      }
+    ]
   },
     {
       name: "Atwal",
@@ -623,5 +630,6 @@ const reviews = [
       date: "2021-04-10"
     },
   ];
-  export default reviews;
+ 
+export default reviews;
 

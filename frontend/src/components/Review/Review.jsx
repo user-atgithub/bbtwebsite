@@ -88,7 +88,7 @@ const Review = () => {
           <label htmlFor="reviewsPerPage" className="mr-2">Show reviews per page:</label>
           <select id="reviewsPerPage" value={reviewsPerPage} onChange={handleChangeReviewsPerPage}>
             <option value={6}>6</option>
-            <option value={11}>11</option>
+            <option value={12}>12</option>
             <option value={21}>21</option>
           </select>
         </div>
@@ -167,6 +167,18 @@ const Review = () => {
                 </button>
               )}
             </p>
+
+            {/* Display Replies */}
+            <div className="mt-4">
+              {Array.isArray(review.replies) && review.replies.length > 0 && (
+                review.replies.map((reply, replyIndex) => (
+                  <div key={replyIndex} className="reply mt-2 pl-5 border-l-2">
+                    <p className="text-gray-600 text-sm">{reply.name} ({reply.date}):</p>
+                    <p className="text-textColor text-sm">{reply.text}</p>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         ))}
       </div>

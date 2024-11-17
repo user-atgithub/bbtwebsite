@@ -1,5 +1,29 @@
 const reviews = [
   {
+    name: "Bhullar",
+    rating: 5.0,
+    text: "",
+    date: "2024-11-15"
+  },
+  {
+    name: "Mohsin",
+    rating: 5.0,
+    text: "I recently had Mr. Bhuvnesh install a CarPlay system in my van, and I couldn’t be more impressed with his service. The installation was flawless—no dangling wires, everything was neatly tucked away, and the job looked incredibly professional. What really stood out was his attention to detail and honesty. He took the time to explain everything thoroughly and made sure I was completely satisfied with the setup. Highly recommend his services for anyone looking to upgrade their vehicle’s tech! \n Notable: • Pricing • Item Description • Punctuality • Communication",
+    date: "2024-11-15"
+  },
+  {
+    name: "Lili",
+    rating: 4.0,
+    text: "Notable: • Item Description",
+    date: "2024-11-15"
+  },
+  {
+    name: "Matheus",
+    rating: 5.0,
+    text: "Bhuvnesh did an awesome job installing my new speakers and sound deadening. My car is so quiet now, and the sound quality is incredible-way better than I expected! He was super professional, paid attention to every detail, and really knew what he was doing. I'm beyond happy with the results. Highly recommend him! \n Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-11-14"
+  },
+  {
     name: "Tony",
     rating: 5.0,
     text: "Bhuvnesh was great!! Very knowledgeable. Always stayed in contact with me. Explained what he was going to do. No hidden fees or extras. Product was exactly what he said it was. Clean and professional install as if it was factory done. Took the time to go over and explain the features. Thank you!! \n Notable: • Punctuality • Communication • Pricing • Item Description",

@@ -1,5 +1,75 @@
 const reviews = [
   {
+    name: "Seger",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Came all the way out to meet me and helped modify the speakers for my car. Great guy :) def recommend \n Notable: • Punctuality • Communication • Pricing ",
+    date: "2024-12-21"
+  },
+  {
+    name: "Raymun",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Bhuvnesh solved my problem, when my anroid screen did not have any sound or backup camera. \n Bhuvnesh knows what's he is doing and is knowledgeable. Will definitely use him for future projects. \n Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-12-21"
+  },
+  {
+    name: "Edwin",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Bhuvnesh went above & beyond on my expectations on installing a double din and door speakers! Highly recommended amazing work lots of knowledge I will be definitely using him for all my install needs moving forward and will be recommending him to my friends and family! Thank you again? \n Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-12-18"
+  },
+  {
+    name: "Jamie",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Bhuvnesh was absolutely wonderful to deal with. He was professional, courteous and went out of his way to be informative about the products and what he thought of what was required. I absolutely, 100%, would recommend him and his services. \n There was a minor glitch in our initial set-up and he fixed the issue at his own cost and even gave us an upgrade. Better prices than I found anywhere and real actual service. Very happy to have dealt with Bhuvnesh!",
+    date: "2024-12-09"
+  },
+  {
+    name: "Anna",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "He's very willing to help although I have not bought anything from him. \n In this aspect, I am truly appreciative. \n Notable: • Punctuality • Communication • Item Description",
+    date: "2024-12-06"
+  },
+  {
+    name: "Amisi",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Notable: • Punctuality • Communication • Item Description",
+    date: "2024-12-05"
+  },
+  {
+    name: "Alex",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "",
+    date: "2024-12-03"
+  },
+  {
+    name: "Alex",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Really knows what he's doing and knows as well what he's selling. \n He helped me out figure what was going on with my car stereo!! Recommended 200% \n Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-11-25"
+  },
+  {
+    name: "Levi",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Notable: • Pricing • Punctuality • Communication",
+    date: "2024-11-24"
+  },
+  {
+    name: "Alex",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "I would definitely recommend Bhuvnesh to other people. \n Notable: • Punctuality • Communication • Pricing",
+    date: "2024-11-20"
+  },
+  {
     name: "Bhullar",
     source:"Facebook Marketplace",
     rating: 5.0,

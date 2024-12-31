@@ -1,11 +1,32 @@
 const reviews = [
   {
+    name: "Vivian",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-12-30"
+  },  
+  {
+    name: "David",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Nice and Helpful \n Notable: • Communication • Pricing • Item Description",
+    date: "2024-12-28"
+  },  
+  {
+    name: "Matthew",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "Great price \n Accurate description \n Responded fast \n Friendly and helpful \n Notable: • Punctuality • Communication • Pricing • Item Description",
+    date: "2024-12-27"
+  },  
+  {
     name: "Seger",
     source:"Facebook Marketplace",
     rating: 5.0,
     text: "Came all the way out to meet me and helped modify the speakers for my car. Great guy :) def recommend \n Notable: • Punctuality • Communication • Pricing ",
     date: "2024-12-21"
-  },
+  }, 
   {
     name: "Raymun",
     source:"Facebook Marketplace",

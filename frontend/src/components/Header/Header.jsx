@@ -9,9 +9,10 @@ const navLinks = [
   { path: '/home', display: 'Home' },
   { path: '/technicians', display: 'Find a Technician' },
   { path: '/services', display: 'Services' },
+  { path: '/products', display: 'Products' }, // New Products Link
   { path: '/reviews', display: 'Reviews' },
   { path: '/contact', display: 'Contact' },
-  { path: '/products', display: 'Products' }, // New Products Link
+
 ];
 
 const Header = () => {

@@ -30,12 +30,12 @@ const Technicians = () => {
                     <div className="max-w-[570px] mt-[30px] mx-auto bg-[#0066ff2c] rounded-md flex items-center justify-between">
                         <input
                             type="search"
-                            className="py-4 pl-4 pr-2 bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor"
+                            className="py-2 pl-4 pr-2 bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor text-sm sm:text-base"
                             placeholder="Search technician by name or specification"
                             value={query}
                             onChange={e => setQuery(e.target.value)}
                         />
-                        <button className="btn mt-0 rounded-[0px] rounded-r-md" onClick={() => setQuery(query.trim())}>
+                        <button className="btn mt-0 rounded-[0px] rounded-r-md text-sm sm:text-base" onClick={() => setQuery(query.trim())}>
                             Search
                         </button>
                     </div>

@@ -9,4 +9,4 @@ const Error = ({ errMessage }) => {
     );
   };
   
-  export default Error;  
+  export default Error;

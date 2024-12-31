@@ -95,7 +95,7 @@ const Home = () => {
                     <div className="flex flex-col items-center text-center gap-[30px]">
                         {/*======hero content======*/}
                         <div>
-                            <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px] text-center max-w-[950px] mx-auto sm:text-[28px] sm:leading-[38px]">
+                            <h1 className="text-[28px] leading-[38px] text-headingColor font-[800] md:text-[60px] md:leading-[70px] text-center max-w-[950px] mx-auto sm:text-[24px] sm:leading-[34px]">
                                 <span>{typedText}</span>
                             </h1>
                             <p className="text__para text-center max-w-3xl mx-auto mt-4">
@@ -104,7 +104,7 @@ const Home = () => {
                             {/* Apply slide-up animation class based on `showButton` state */}
                             {showButton && (
                                 <button
-                                    className="btn mt-6 slide-up" 
+                                    className="btn mt-6 slide-up px-4 py-2 text-sm sm:text-base md:text-lg"
                                     onClick={handleClick}>
                                     Request an Appointment
                                 </button>

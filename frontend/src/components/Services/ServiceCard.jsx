@@ -11,7 +11,7 @@ const ServiceCard = ({ item, index }) => {
                 <h2 className="text-xl font-bold text-headingColor mb-4">
                     {name}
                 </h2>
-                <p className="text-base text-textColor">
+                <p className="text-base text-textColor text-justify">
                     {desc}
                 </p>
             </div>

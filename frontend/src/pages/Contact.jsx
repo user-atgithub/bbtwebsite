@@ -152,6 +152,7 @@ const Contact = () => {
           pointer-events: ${loading ? "none" : "auto"};
           width: 100%; /* Make the button take full width */
           box-sizing: border-box;
+          font-size: 16px; /* Adjust font size for better scaling */
         }
 
         /* Mobile-first layout */
@@ -170,7 +171,7 @@ const Contact = () => {
           .form-container label,
           .form-container input,
           .form-container p {
-            font-size: 14px;
+            font-size: 14px; /* Adjust font size for mobile */
           }
           .form-container input {
             padding: 6px;
@@ -178,6 +179,7 @@ const Contact = () => {
 
           .submit-button {
             padding: 12px 20px; /* Adjust padding for mobile */
+            font-size: 14px; /* Adjust font size for mobile */
           }
 
           .recaptcha-container {

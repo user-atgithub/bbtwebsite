@@ -42,6 +42,13 @@ const reviews = [
     date: "2024-12-18"
   },
   {
+    name: "Ishwar",
+    source:"Facebook Marketplace",
+    rating: 5.0,
+    text: "",
+    date: "2024-12-11"
+  },
+  {
     name: "Jamie",
     source:"Facebook Marketplace",
     rating: 5.0,

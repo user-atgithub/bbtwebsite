@@ -11,6 +11,7 @@ const navLinks = [
   { path: '/services', display: 'Services' },
   { path: '/reviews', display: 'Reviews' },
   { path: '/contact', display: 'Contact' },
+  { path: '/products', display: 'Products' }, // New Products Link
 ];
 
 const Header = () => {
